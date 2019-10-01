@@ -1,46 +1,49 @@
 import 'core-js/es/array/flat-map'
 
 let _app
-let ratio = 1;
-let gameWidth;
-let gameHeight;
+let ratio = 1
+let gameWidth
+let gameHeight
 
 export const init = (app) => {
   gameWidth = app.renderer.width
   gameHeight = app.renderer.height
 
   _app = app
-
-  _logging = logging
 }
 
-export const getTexture = (filename) => {
+const throwErrorIfNoInit = () => {
   if (!_app) {
     throw new Error('ex.init has not been called')
   }
+}
+
+export const getTexture = (filename) => {
+  throwErrorIfNoInit()
+
   try {
     const texture = Object
       .values(_app.loader.resources)
-      .filter(resource => resource.textures)
-      .flatMap(resource => Object.entries(resource.textures))
-      .find(([key]) => key === `${filename}.png`);
-  
-    return texture[1];
+      .filter((resource) => resource.textures)
+      .flatMap((resource) => Object.entries(resource.textures))
+      .find(([key]) => key === `${filename}.png`)
+
+    return texture[1]
   } catch (error) {
-    throw new Error(`pixi-ex: Texture "${filename}" could not be retrieved: ${error}`);
+    throw new Error(`pixi-ex: Texture "${filename}" could not be retrieved: ${error}`)
   }
-};
+}
 
 export const getAllTextureIds = () => {
   if (!_app) {
-    throw new Error('ex.init has not been called');
+    throw new Error('ex.init has not been called')
   }
   return Object
     .values(_app.loader.resources)
-    .filter(resource => resource.textures)
-    .flatMap(resource => Object.keys(resource.textures))
-    .map(key => key.substring(0, key.length - 4));
-};
+    .filter((resource) => resource.textures)
+    .flatMap((resource) => Object.keys(resource.textures))
+    .map((key) => key.substring(0, key.length - 4))
+}
 
 export const getAllChildren = (displayObject) => {
   if (displayObject.children.length) {
@@ -55,19 +58,19 @@ export const resize = (width, height) => {
   ratio = Math.min(
     width / gameWidth,
     height / gameHeight,
-  );
+  )
 
   _app
     .stage
     .scale
-    .set(ratio);
+    .set(ratio)
 
   _app
     .renderer
     .resize(
       gameWidth * ratio,
       gameHeight * ratio,
-    );
+    )
 
   /*
       The following code is needed to counteract the scale change on the whole canvas since
@@ -75,40 +78,43 @@ export const resize = (width, height) => {
       Texts instead change size by setting their fontSize.
     */
   getAllChildren(_app.stage)
-    // Keep if resizable text object 
-    .filter(c => c.originalFontSize)
+    // Keep if resizable text object
+    .filter((c) => c.originalFontSize)
     .forEach((displayObject) => {
-      displayObject.style.fontSize = displayObject.originalFontSize * ratio;
-      displayObject.scale.set(1 / ratio);
-    });
-};
+      // eslint-disable-next-line no-param-reassign
+      displayObject.style.fontSize = displayObject.originalFontSize * ratio
+      displayObject.scale.set(1 / ratio)
+    })
+}
 
 export const makeResizable = (textObject) => {
-  // This will break typechecking
-  textObject.originalFontSize = textObject.style.fontSize;
+  // This will probably break typechecking
+  // eslint-disable-next-line no-param-reassign
+  textObject.originalFontSize = textObject.style.fontSize
+  // eslint-disable-next-line no-param-reassign
   textObject.style = {
     ...textObject.style,
     fontSize: textObject.style.fontSize * ratio,
-  };
-  textObject.scale.set(1 / ratio);
-};
+  }
+  textObject.scale.set(1 / ratio)
+}
 
 // makeDraggable
 const startEvents = [
   'mousedown',
   'touchstart',
-];
+]
 
 const endEvents = [
   'pointerup',
   'pointerupoutside',
-];
+]
 
 const moveEvents = [
   'pointermove',
-];
+]
 
-const noop = () => {};
+const noop = () => {}
 
 export const makeDraggable = (displayObject, options = {}) => {
   const {
@@ -116,60 +122,65 @@ export const makeDraggable = (displayObject, options = {}) => {
     onDragEnd = noop,
     onDragMove = noop,
     disabler = () => false,
-  } = options;
+  } = options
 
-  displayObject.interactive = true;
+  // eslint-disable-next-line no-param-reassign
+  displayObject.interactive = true
 
   startEvents.forEach((event) => {
-    displayObject.on(event, onDragStartInternal(displayObject, onDragStart, disabler));
-  });
+    displayObject.on(event, onDragStartInternal(displayObject, onDragStart, disabler))
+  })
 
   endEvents.forEach((event) => {
-    displayObject.on(event, onDragEndInternal(displayObject, onDragEnd, disabler));
-  });
+    displayObject.on(event, onDragEndInternal(displayObject, onDragEnd, disabler))
+  })
 
   moveEvents.forEach((event) => {
-    displayObject.on(event, onDragMoveInternal(displayObject, onDragMove, disabler));
-  });
-};
+    displayObject.on(event, onDragMoveInternal(displayObject, onDragMove, disabler))
+  })
+}
 
 const onDragMoveInternal = (displayObject, onDragMove, disabler) => () => {
   if (disabler()) {
-    return;
+    return
   }
 
   if (displayObject.dragging) {
-    const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent);
-    onDragMove({ x, y });
+    const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent)
+    onDragMove({ x, y })
   }
-};
+}
 
 const onDragStartInternal = (displayObject, onDragStart, disabler) => (event) => {
   if (disabler()) {
-    return;
+    return
   }
 
-  // This will break typechecking
-  displayObject.dragData = event.data;
-  displayObject.dragging = true;
+  // This will probably break typechecking
+  // eslint-disable-next-line no-param-reassign
+  displayObject.dragData = event.data
+  // eslint-disable-next-line no-param-reassign
+  displayObject.dragging = true
 
-  const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent);
+  const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent)
 
-  onDragStart({ x, y });
-};
+  onDragStart({ x, y })
+}
 
 const onDragEndInternal = (displayObject, onDragEnd, disabler) => () => {
   if (disabler() || !displayObject.dragData) {
-    return;
+    return
   }
 
-  const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent);
+  const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent)
 
-  onDragEnd({ x, y });
+  onDragEnd({ x, y })
 
-  displayObject.dragging = false;
-  displayObject.dragData = null;
-};
+  // eslint-disable-next-line no-param-reassign
+  displayObject.dragging = false
+  // eslint-disable-next-line no-param-reassign
+  displayObject.dragData = null
+}
 
 // makeDraggable end
 
@@ -190,93 +201,98 @@ export const makeClickable = (displayObject, onClick) => {
   })
 }
 
-export const getGameScale = () => ratio;
+export const getGameScale = () => ratio
 
 // Convert #ff00ff to 0xff00ff
-export const fromHex = color => `0x${color.substring(1, color.length)}`;
+export const fromHex = (color) => `0x${color.substring(1, color.length)}`
 
 export const getGlobalPosition = (displayObject) => {
-  const global = displayObject.toGlobal({ x: 0, y: 0 });
+  const global = displayObject.toGlobal({ x: 0, y: 0 })
 
   return {
     x: global.x / ratio,
     y: global.y / ratio,
-  };
-};
+  }
+}
 
 const getWidth = (displayObject) => (displayObject.hitArea && displayObject.hitArea.width)
-  || displayObject.width;
+  || displayObject.width
 const getHeight = (displayObject) => (displayObject.hitArea && displayObject.hitArea.height)
-  || displayObject.height;
+  || displayObject.height
 
 export const isColliding = (displayObject, otherDisplayObject) => {
   const {
     x: entityX,
     y: entityY,
-  } = getGlobalPosition(displayObject);
+  } = getGlobalPosition(displayObject)
 
-  const entityWidth = getWidth(displayObject);
-  const entityHeight = getHeight(displayObject);
+  const entityWidth = getWidth(displayObject)
+  const entityHeight = getHeight(displayObject)
 
   const {
     x: otherEntityX,
     y: otherEntityY,
-  } = getGlobalPosition(otherDisplayObject);
+  } = getGlobalPosition(otherDisplayObject)
 
-  const otherEntityWidth = getWidth(otherDisplayObject);
-  const otherEntityHeight = getHeight(otherDisplayObject);
+  const otherEntityWidth = getWidth(otherDisplayObject)
+  const otherEntityHeight = getHeight(otherDisplayObject)
 
   return (entityX + entityWidth >= otherEntityX
     && otherEntityX + otherEntityWidth >= entityX
     && entityY + entityHeight >= otherEntityY
-    && otherEntityY + otherEntityHeight >= entityY);
-};
+    && otherEntityY + otherEntityHeight >= entityY)
+}
 
 export const getOverlappingArea = (displayObject, otherDisplayObject) => {
   if (!isColliding(displayObject, otherDisplayObject)) {
-    return 0;
+    return 0
   }
 
   const {
     x: entityX,
     y: entityY,
-  } = getGlobalPosition(displayObject);
+  } = getGlobalPosition(displayObject)
 
-  const entityWidth = getWidth(displayObject);
-  const entityHeight = getHeight(displayObject);
+  const entityWidth = getWidth(displayObject)
+  const entityHeight = getHeight(displayObject)
 
   const {
     x: otherEntityX,
     y: otherEntityY,
-  } = getGlobalPosition(otherDisplayObject);
+  } = getGlobalPosition(otherDisplayObject)
 
-  const otherEntityWidth = getWidth(otherDisplayObject);
-  const otherEntityHeight = getHeight(otherDisplayObject);
+  const otherEntityWidth = getWidth(otherDisplayObject)
+  const otherEntityHeight = getHeight(otherDisplayObject)
 
-  const minX = Math.max(entityX, otherEntityX);
-  const maxX = Math.min(entityX + entityWidth, otherEntityX + otherEntityWidth);
-  const dX = maxX - minX;
+  const minX = Math.max(entityX, otherEntityX)
+  const maxX = Math.min(entityX + entityWidth, otherEntityX + otherEntityWidth)
+  const dX = maxX - minX
 
-  const minY = Math.max(entityY, otherEntityY);
-  const maxY = Math.min(entityY + entityHeight, otherEntityY + otherEntityHeight);
-  const dY = maxY - minY;
+  const minY = Math.max(entityY, otherEntityY)
+  const maxY = Math.min(entityY + entityHeight, otherEntityY + otherEntityHeight)
+  const dY = maxY - minY
 
-  return dX * dY;
-};
+  return dX * dY
+}
 
-// TODO: Remove the dependency on l1.repeat
-export const drawHitArea = (displayObject, graphics) => {
+export const drawHitArea = (graphics) => {
   if (!_app) {
-    throw new Error('ex.init has not been called');
+    throw new Error('ex.init has not been called')
   }
-  _app.stage.addChild(graphics);
-  const behavior = repeat(() => {
+
+  // eslint-disable-next-line no-param-reassign
+  graphics.name = 'pixi-ex: drawHitArea'
+  _app.stage.addChild(graphics)
+
+  // Needs to be called each game update
+  const render = (displayObject) => {
     if (!displayObject._destroyed) {
-      const width = getWidth(displayObject);
-      const height = getHeight(displayObject);
+      const width = getWidth(displayObject)
+      const height = getHeight(displayObject)
 
-      const { x, y } = getGlobalPosition(displayObject, ratio);
+      const { x, y } = getGlobalPosition(displayObject, ratio)
 
+      // TODO: use drawRect
       graphics
         .clear()
         .lineStyle(2, 0xFFFFFF, 1)
@@ -284,8 +300,8 @@ export const drawHitArea = (displayObject, graphics) => {
         .lineTo(x + width, y)
         .lineTo(x + width, y + height)
         .lineTo(x, y + height)
-        .lineTo(x, y);
+        .lineTo(x, y)
     }
-  });
-  behavior.id = displayObject.name ? `${displayObject.name}-drawHitArea` : null;
-};
+  }
+  return render
+}

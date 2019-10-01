@@ -1,0 +1,7 @@
+extends: airbnb-base
+rules:
+  no-use-before-define: off
+  no-underscore-dangle: off
+  semi:
+    - error
+    - never

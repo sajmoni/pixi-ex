@@ -1,8 +1,9 @@
-# pixi-ex
-
-> Pixi extended - Utility functions for Pixi.js
-
-`pixi-ex` is a collection of functions that make `pixi.js` easier to use.
+<h1 align="center" style="background-color: black; color:#2bc4c2; padding: 10px 0 15px 0">
+  pixi-ex
+</h1>
+<h4 align="center">
+  Pixi extended - Utility functions for Pixi.js
+</h4>
 
 ---
 
@@ -10,21 +11,15 @@
 
 - [`ex.resize`](docs/api/resize) - Resize the canvas and retain the correct proportions
 
-- [`ex.getTexture`](docs/api/getTexture) - Function to get pre-loaded textures. The input is the image name _without_ the file suffix (`.png`).
+- [`ex.getTexture`](docs/api/getTexture) - Easily get pre-loaded textures
 
-```js
-new PIXI.Sprite(ex.getTexture('square'))
-```
-
-- [`ex.getGameScale`](docs/api/getGameScale) - The scale of the screen. Will be 1 if `ex.resize` has not been used.
-
-- [`ex.getGlobalPosition`](docs/api/getGlobalPosition) - Function to get the global position of a PIXI.DisplayObject
+- [`ex.getGlobalPosition`](docs/api/getGlobalPosition) - Get the global position of a display object
 
 - [`ex.getOverlappingArea`](docs/api/getOverlappingArea) - The area that two display objects are overlapping.
 
- - [`ex.drawHitArea`](docs/api/drawHitArea) - Draw the hitArea if defined, otherwise width and height
+ - [`ex.drawHitArea`](docs/api/drawHitArea) - Draw a display objects `hitArea` if defined, otherwise width and height
 
- - [`ex.isColliding`](docs/api/isColliding) - Returns true if two display objects are colliding / overlapping.
+ - [`ex.isColliding`](docs/api/isColliding) - Returns true if two display objects are colliding / overlapping
 
  - [`ex.fromHex`](docs/api/fromHex) - Convert `#ff00ff` to `0xff00ff`
 
@@ -32,15 +27,19 @@ new PIXI.Sprite(ex.getTexture('square'))
  
  - [`ex.makeDraggable`](docs/api/makeDraggable) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
  
- - [`ex.makeResizable`](docs/api/makeResizable) - If you use `ex.resize`, then you need to call `makeResizable` on all `Text` objects, in order for them to look good.
+ - [`ex.makeResizable`](docs/api/makeResizable) - Make text objects look good even when resized
  
  - [`ex.getAllChildren`](docs/api/getAllChildren) - Recursively get all children (including the input display object) from this point in the hierarchy, in a flat list.
 
- - [`ex.getAllTextureIds`](docs/api/getAllTextureIds) - Get all file names defined in all of your sprite sheets.
+ - [`ex.getAllTextureIds`](docs/api/getAllTextureIds) - Get all file names defined in all of your sprite sheets
+
+[Full API docs](docs/README.md)
 
 ---
 
 ## Example usage
+
+> Get a pre-loaded texture
 
 ```js
 import * as PIXI from 'pixi.js'
@@ -102,6 +101,20 @@ If you want the game to be horizontally centered:
 <div id="container">
   <div id="game"></div>
 </div>
+```
+
+### Make all text objects resizable
+
+If you are making a resizable game, you probably want all text objects to look good when resized.
+
+In that case, you might want to wrap the `Pixi.Text` constructor.
+
+```js
+export default (text, textStyle = {}) => {
+  const textObject = new PIXI.Text(text, textStyle)
+  ex.makeResizable(textObject)
+  return textObject
+}
 ```
 
 ---

@@ -8,7 +8,7 @@ name: getGameScale
 ex.getGameScale()
 ```
 
-Get the scale of the screen after it has been resized.
+Get the scale of the screen after it has been resized. Will be 1 if `ex.resize` has not been used.
 
 ## Arguments
 
@@ -16,4 +16,4 @@ None.
 
 ## Returns
 
-(Number) The screen scale
+(Float) The screen scale

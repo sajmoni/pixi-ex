@@ -8,7 +8,9 @@ name: getTexture
 ex.getTexture(fileName)
 ```
 
-Gets a pre-loaded texture. Texture names need to be unique across all sprite sheets.
+Gets a pre-loaded texture. The input is the image name _without_ the file suffix (`.png`).
+
+_Note. Texture names need to be unique across all sprite sheets_
 
 ## Arguments
 
@@ -21,5 +23,5 @@ Gets a pre-loaded texture. Texture names need to be unique across all sprite she
 ## Example
 
 ```js
-const sprite = new PIXI.Sprite(ex.getTexture('lizard'))
+new PIXI.Sprite(ex.getTexture('player'))
 ```

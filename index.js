@@ -38,6 +38,7 @@ export const getAllTextureIds = () => {
   if (!_app) {
     throw new Error('ex.init has not been called')
   }
+
   return Object
     .values(_app.loader.resources)
     .filter((resource) => resource.textures)
@@ -194,8 +195,6 @@ export const makeClickable = (displayObject, onClick) => {
 
   CLICK_EVENTS.forEach((event) => {
     displayObject.on(event, () => {
-      // eslint-disable-next-line no-param-reassign
-      displayObject.cursor = 'default'
       onClick()
     })
   })

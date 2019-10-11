@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "rm -rf dist && parcel build ./index.js --no-cache --no-source-maps --global pixi-ex",
+    "build": "rm -rf dist && parcel build ./index.js --no-cache --no-source-maps",
     "lint": "eslint index.js",
     "release": "yarn build && np",
     "test": "ava"

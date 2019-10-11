@@ -275,7 +275,7 @@ export const getOverlappingArea = (displayObject, otherDisplayObject) => {
   return dX * dY
 }
 
-export const drawHitArea = (graphics) => {
+export const drawHitArea = (displayObject, graphics) => {
   if (!_app) {
     throw new Error('ex.init has not been called')
   }
@@ -285,22 +285,17 @@ export const drawHitArea = (graphics) => {
   _app.stage.addChild(graphics)
 
   // Needs to be called each game update
-  const render = (displayObject) => {
+  const render = () => {
     if (!displayObject._destroyed) {
       const width = getWidth(displayObject)
       const height = getHeight(displayObject)
 
       const { x, y } = getGlobalPosition(displayObject, ratio)
 
-      // TODO: use drawRect
       graphics
         .clear()
         .lineStyle(2, 0xFFFFFF, 1)
-        .moveTo(x, y)
-        .lineTo(x + width, y)
-        .lineTo(x + width, y + height)
-        .lineTo(x, y + height)
-        .lineTo(x, y)
+        .drawRect(x, y, width, height)
     }
   }
   return render

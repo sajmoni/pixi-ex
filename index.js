@@ -35,9 +35,7 @@ export const getTexture = (filename) => {
 }
 
 export const getAllTextureIds = () => {
-  if (!_app) {
-    throw new Error('ex.init has not been called')
-  }
+  throwErrorIfNoInit()
 
   return Object
     .values(_app.loader.resources)
@@ -56,6 +54,8 @@ export const getAllChildren = (displayObject) => {
 }
 
 export const resize = (width, height) => {
+  throwErrorIfNoInit()
+
   ratio = Math.min(
     width / gameWidth,
     height / gameHeight,
@@ -275,9 +275,7 @@ export const getOverlappingArea = (displayObject, otherDisplayObject) => {
 }
 
 export const drawHitArea = (displayObject, graphics) => {
-  if (!_app) {
-    throw new Error('ex.init has not been called')
-  }
+  throwErrorIfNoInit()
 
   // eslint-disable-next-line no-param-reassign
   graphics.name = 'pixi-ex: drawHitArea'

@@ -121,10 +121,8 @@ export default (text, textStyle = {}) => {
 
 ## See also
 
-[`juice.js`]() - Add "juice" to you animations to make them look nicer
+[`juice.js`](https://github.com/rymdkraftverk/juice.js) - Add "juice" to you animations to make them look nicer
 
-[`muncher`]() - Automatically generate sprite sheets from the command line 
+[`muncher`](https://github.com/sajmoni/muncher) - Automatically generate sprite sheets from the command line 
 
-[`tiny-toolkit`]()
-
-[`level1`]()
+[`level1`](https://github.com/rymdkraftverk/level1) - Delayed and repeated callback execution for games

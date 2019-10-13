@@ -27,6 +27,10 @@
   },
   "dependencies": {
     "core-js": "3.2.1"
+  },
+  "ava": {
+    "require": [
+      "@babel/register"
+    ]
   }
 }
-  

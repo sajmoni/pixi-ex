@@ -2,7 +2,10 @@
   "name": "pixi-ex",
   "version": "0.0.2",
   "description": "Pixi extended - Utility library for Pixi.js",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "/dist/*"
+  ],
   "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
   "license": "MIT",
   "private": false,

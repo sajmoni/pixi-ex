@@ -16,17 +16,18 @@
     "test": "ava"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.6.2",
-    "@babel/register": "7.6.2",
+    "@babel/preset-env": "7.7.5",
+    "@babel/register": "7.7.4",
     "ava": "2.4.0",
-    "eslint": "6.5.0",
+    "eslint": "6.7.2",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.18.2",
-    "np": "5.1.0",
-    "parcel-bundler": "1.12.3"
+    "np": "5.2.1",
+    "parcel-bundler": "1.12.4",
+    "pixi.js": "5.2.0"
   },
   "dependencies": {
-    "core-js": "3.2.1"
+    "core-js": "3.4.7"
   },
   "ava": {
     "require": [

@@ -1,2 +1,16 @@
 # API
 
+- [drawHitArea](api/drawHitArea)
+- [fromHex](api/fromHex)
+- [getAllChildren](api/getAllChildren)
+- [getAllTextureIds](api/getAllTextureIds)
+- [getGameScale](api/getGameScale)
+- [getGlobalPosition](api/getGlobalPosition)
+- [getOverlappingArea](api/getOverlappingArea)
+- [getTexture](api/getTexture)
+- [init](api/init)
+- [isColliding](api/isColliding)
+- [makeClickable](api/makeClickable)
+- [makeDraggable](api/makeDraggable)
+- [makeResizable](api/makeResizable)
+- [resize](api/resize)

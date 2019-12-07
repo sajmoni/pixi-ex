@@ -20,7 +20,7 @@ The hexadecimal literal is for example required by PIXI.Graphics.
 
 ## Returns
 
-(String)
+(Number)
 
 ## Example
 

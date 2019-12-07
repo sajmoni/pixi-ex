@@ -8,7 +8,7 @@ name: drawHitArea
 ex.drawHitArea(displayObject, graphics)
 ```
 
-Will display the hitArea for a `PIXI.DisplayObject`, if defined. Otherwise the width and height will be used. Returns a `render` function that needs to be called on each game update.
+Will display the `hitArea` for a `PIXI.DisplayObject`, if defined. Otherwise the width and height will be used. Returns a `render` function that needs to be called on each game update.
 
 ## Arguments
 
@@ -24,11 +24,14 @@ A `render` function with no arguments
 
 ```js
 import * as PIXI from 'pixi.js'
+import * as ex from 'pixi-ex'
+
+const render = ex.drawHitArea(
+  new PIXI.Sprite(texture), 
+  new PIXI.Graphics(),
+)
 
 const app = new PIXI.Application()
 
-const sprite = new Pixi.Sprite(texture)
-
-const render = ex.drawHitArea(sprite, new PIXI.Graphics())
 app.ticker.add(render)
 ```

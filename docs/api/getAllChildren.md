@@ -16,4 +16,4 @@ Recursively get all descendants of a display object. Will return a flat list of 
 
 ## Returns
 
-(array): A flat list of display objects which has this display object as an ancestor.
+(array): A flat list of display objects which has this display object as an ancestor, including the original display object.

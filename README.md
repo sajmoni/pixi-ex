@@ -5,6 +5,13 @@
   Pixi extended - Utility functions for Pixi.js
 </h4>
 
+<div align="center">
+  <img src="https://badgen.net/npm/v/pixi-ex?icon=npm" />
+  <!-- <img src="https://badgen.net/npm/dw/pixi-ex?icon=npm" /> -->
+  <img src="https://badgen.net/bundlephobia/minzip/pixi-ex" />
+  <img src="https://badgen.net/github/last-commit/sajmoni/pixi-ex?icon=github" />
+</div>
+
 ---
 
 ## Features

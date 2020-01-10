@@ -232,9 +232,13 @@ export const isColliding = (displayObject, otherDisplayObject) => {
     x: otherEntityX,
     y: otherEntityY,
   } = getGlobalPosition(otherDisplayObject)
+  console.log('TCL: isColliding -> otherEntityX', otherEntityX)
+  console.log('TCL: isColliding -> otherEntityY', otherEntityY)
 
   const otherEntityWidth = getWidth(otherDisplayObject)
+  console.log('TCL: isColliding -> otherEntityWidth', otherEntityWidth)
   const otherEntityHeight = getHeight(otherDisplayObject)
+  console.log('TCL: isColliding -> otherEntityHeight', otherEntityHeight)
 
   return (entityX + entityWidth >= otherEntityX
     && otherEntityX + otherEntityWidth >= entityX

@@ -9,7 +9,7 @@
     "start": "parcel ./index.html --no-autoinstall --no-cache"
   },
   "dependencies": {
-    "pixi-ex": "file:../",
+    "pixi-ex": "file:../pixi-ex.tgz",
     "pixi.js": "5.2.0"
   },
   "devDependencies": {

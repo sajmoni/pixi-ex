@@ -10,6 +10,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "clean": "rm -f pixi-ex.tgz",
+    "build-test": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && cd -",
     "build": "rm -rf dist && parcel build ./index.js --no-cache --no-source-maps",
     "lint": "eslint index.js",
     "release": "yarn build && np",

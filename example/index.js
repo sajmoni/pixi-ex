@@ -13,11 +13,11 @@ document
   .getElementById('game')
   .appendChild(app.view)
 
-ex.init(app)
-
 app.loader.add('spritesheet.json')
 
 app.loader.load(() => {
+  ex.init(app)
+
   const squareContainer = new PIXI.Container()
   squareContainer.position = { x: 100, y: 100 }
   squareContainer.hitArea = new PIXI.Rectangle(0, 0, 300, 200)

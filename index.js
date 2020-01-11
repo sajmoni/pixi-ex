@@ -4,12 +4,45 @@ let _app
 let ratio = 1
 let gameWidth
 let gameHeight
+const textureMap = {}
+const textureIds = []
+
+const extractTextures = (app) => {
+  const textureEntries = Object
+    .values(app.loader.resources)
+    .filter((resource) => resource.textures)
+    .flatMap((resource) => Object.entries(resource.textures))
+
+  textureEntries.forEach(([key, texture]) => {
+    const name = key.substring(0, key.length - 4)
+    textureIds.push(name)
+
+    if (!textureMap[name]) {
+      textureMap[name] = texture
+    } else {
+      throw new Error(`pixi-ex: Texture names need to be unique: ${name}`)
+    }
+  })
+}
 
 export const init = (app) => {
   gameWidth = app.renderer.width
   gameHeight = app.renderer.height
 
   _app = app
+
+  const noTexturesFound = Object
+    .values(_app.loader.resources)
+    .filter((resource) => resource.textures)
+    .length === 0
+
+  if (noTexturesFound) {
+    console.warn('pixi-ex: No textures found! pixi.ex needs to be called after resources have been loaded.')
+  } else {
+    extractTextures(app)
+
+    console.log('textureMap', textureMap)
+  }
 }
 
 const throwErrorIfNoInit = () => {
@@ -21,27 +54,19 @@ const throwErrorIfNoInit = () => {
 export const getTexture = (filename) => {
   throwErrorIfNoInit()
 
-  try {
-    const texture = Object
-      .values(_app.loader.resources)
-      .filter((resource) => resource.textures)
-      .flatMap((resource) => Object.entries(resource.textures))
-      .find(([key]) => key === `${filename}.png`)
+  const texture = textureMap[filename]
 
-    return texture[1]
-  } catch (error) {
-    throw new Error(`pixi-ex: Texture "${filename}" could not be retrieved: ${error}`)
+  if (!texture) {
+    throw new Error(`pixi-ex: Texture "${filename}" could not be retrieved`)
   }
+
+  return texture
 }
 
 export const getAllTextureIds = () => {
   throwErrorIfNoInit()
 
-  return Object
-    .values(_app.loader.resources)
-    .filter((resource) => resource.textures)
-    .flatMap((resource) => Object.keys(resource.textures))
-    .map((key) => key.substring(0, key.length - 4))
+  return textureIds
 }
 
 export const getAllChildren = (displayObject) => {

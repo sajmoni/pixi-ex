@@ -26,7 +26,6 @@ const mockPixiApp = {
   },
 }
 
-
 test('some functions throw errors before init is called', (t) => {
   t.throws(ex.getTexture)
   t.throws(ex.getAllTextureIds)
@@ -37,6 +36,10 @@ test('some functions throw errors before init is called', (t) => {
 
 test('getTexture', (t) => {
   t.deepEqual(ex.getTexture('sprite1'), {})
+})
+
+test('getTexture - texture not found', (t) => {
+  t.throws(() => ex.getTexture('sprite2'))
 })
 
 test('getAllTextureIds', (t) => {
@@ -57,4 +60,23 @@ test('getAllChildren', (t) => {
 
 test('resize', (t) => {
   t.notThrows(() => { ex.resize(1200, 1000) })
+})
+
+test('init - duplicate texture names across sprite sheets', (t) => {
+  t.deepEqual(ex.getTexture('sprite1'), {})
+  t.throws(() => ex.init({
+    ...mockPixiApp,
+    loader: {
+      ...mockPixiApp.loader,
+      resources: {
+        ...mockPixiApp.loader.resources,
+        'spritesheet.json': {
+          textures: { 'sprite1.png': {} },
+        },
+        'spritesheet2.json': {
+          textures: { 'sprite1.png': {} },
+        },
+      },
+    },
+  }))
 })

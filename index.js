@@ -40,8 +40,6 @@ export const init = (app) => {
     console.warn('pixi-ex: No textures found! pixi.ex needs to be called after resources have been loaded.')
   } else {
     extractTextures(app)
-
-    console.log('textureMap', textureMap)
   }
 }
 

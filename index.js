@@ -20,7 +20,7 @@ const extractTextures = (app) => {
     if (!textureMap[name]) {
       textureMap[name] = texture
     } else {
-      throw new Error(`pixi-ex: Texture names need to be unique: ${name}`)
+      throw new Error(`pixi-ex: Duplicate texture name found: ${name}. Texture names need to be unique`)
     }
   })
 }
@@ -37,7 +37,7 @@ export const init = (app) => {
     .length === 0
 
   if (noTexturesFound) {
-    console.warn('pixi-ex: No textures found! pixi.ex needs to be called after resources have been loaded.')
+    console.warn('pixi-ex: No textures found! init needs to be called after resources have been loaded.')
   } else {
     extractTextures(app)
   }

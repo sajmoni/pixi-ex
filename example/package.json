@@ -5,15 +5,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "refresh": "rm -rf node_modules && yarn",
+    "refresh": "yarn cache clean && rm -rf node_modules && yarn --no-lockfile",
     "start": "parcel ./index.html --no-autoinstall --no-cache"
   },
   "dependencies": {
     "pixi-ex": "file:../pixi-ex.tgz",
-    "pixi.js": "5.2.0"
+    "pixi.js": "5.2.1"
   },
   "devDependencies": {
     "parcel-bundler": "1.12.4",
-    "parcel-plugin-static-files-copy": "2.2.1"
+    "parcel-plugin-static-files-copy": "2.3.1"
   }
 }

@@ -56,12 +56,11 @@ const app = new PIXI.Application()
 
 document.body.appendChild(app.view)
 
-// Give pixi-ex a reference to the Pixi app. This function needs to be called before any other function calls.
-ex.init(app)
-
 app.loader.add('assets/spritesheet.json')
 
 app.loader.load(() => {
+  // Give pixi-ex a reference to the Pixi app. This function needs to be called before any other calls to pixi-ex.
+  ex.init(app)
   const square = new PIXI.Sprite(
     ex.getTexture('square'), // Assuming the spritesheet contains a 'square' texture
   )

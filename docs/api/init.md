@@ -8,11 +8,13 @@ name: init
 ex.init(app)
 ```
 
-Gives `pixi-ex` a reference to your `PIXI.Application` object. Required to be called before any other function call.
+Required to be called before any other function call to `pixi-ex`. 
+
+_Note: init needs to be called after resources have been loaded_
 
 ## Arguments
 
-`app` (object): An instance of PIXI.Application
+`app` (object): Needs to be an object with fields: `renderer` (instance of `PIXI.Renderer`), `loader` (instance of `PIXI.Loader`) and `stage` (instance of `PIXI.Container`). This can be an object you create yourself or an instance of `PIXI.Application`.
 
 ## Returns
 
@@ -30,5 +32,7 @@ const app = PIXI.Application({
 
 document.body.appendChild(app.view)
 
-ex.init(app)
+app.loader.load(() => {
+  ex.init(app)
+})
 ```

@@ -9,6 +9,10 @@
   "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
   "license": "MIT",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajmoni/pixi-ex.git"
+  },
   "scripts": {
     "clean": "rm -f pixi-ex.tgz",
     "build-test": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && cd -",

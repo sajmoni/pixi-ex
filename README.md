@@ -1,6 +1,6 @@
 <img src="./pixi-ex.png">
 <h4 align="center">
-  Pixi extended - Utility functions for Pixi.js
+  Pixi extended - Utility functions for <a href="https://github.com/pixijs/pixi.js">PixiJS</a>
 </h4>
 
 <div align="center">

@@ -16,29 +16,29 @@
 
 ## Features
 
-- [`ex.resize`](docs/api/resize) - Resize the canvas and retain the correct proportions
+- [`ex.resize`](docs/api/resize.md) - Resize the canvas and retain the correct proportions
 
-- [`ex.getTexture`](docs/api/getTexture) - Easily get pre-loaded textures
+- [`ex.getTexture`](docs/api/getTexture.md) - Easily get pre-loaded textures
 
-- [`ex.getGlobalPosition`](docs/api/getGlobalPosition) - Get the global position of a display object
+- [`ex.getGlobalPosition`](docs/api/getGlobalPosition.md) - Get the global position of a display object
 
-- [`ex.getOverlappingArea`](docs/api/getOverlappingArea) - The area that two display objects are overlapping.
+- [`ex.getOverlappingArea`](docs/api/getOverlappingArea.md) - The area that two display objects are overlapping.
 
- - [`ex.drawHitArea`](docs/api/drawHitArea) - Draw a display objects `hitArea` if defined, otherwise width and height
+ - [`ex.drawHitArea`](docs/api/drawHitArea.md) - Draw a display objects `hitArea` if defined, otherwise width and height
 
- - [`ex.isColliding`](docs/api/isColliding) - Returns true if two display objects are colliding / overlapping
+ - [`ex.isColliding`](docs/api/isColliding.md) - Returns true if two display objects are colliding / overlapping
 
- - [`ex.fromHex`](docs/api/fromHex) - Convert `#ff00ff` to `0xff00ff`
+ - [`ex.fromHex`](docs/api/fromHex.md) - Convert `#ff00ff` to `0xff00ff`
 
- - [`ex.makeClickable`](docs/api/makeClickable) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
+ - [`ex.makeClickable`](docs/api/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
  
- - [`ex.makeDraggable`](docs/api/makeDraggable) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
+ - [`ex.makeDraggable`](docs/api/makeDraggable.md) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
  
- - [`ex.makeResizable`](docs/api/makeResizable) - Make text objects look good even when resized
+ - [`ex.makeResizable`](docs/api/makeResizable.md) - Make text objects look good even when resized
  
- - [`ex.getAllChildren`](docs/api/getAllChildren) - Recursively get all children (including the input display object) from this point in the hierarchy, in a flat list.
+ - [`ex.getAllChildren`](docs/api/getAllChildren.md) - Recursively get all children (including the input display object) from this point in the hierarchy, in a flat list.
 
- - [`ex.getAllTextureIds`](docs/api/getAllTextureIds) - Get all file names defined in all of your sprite sheets
+ - [`ex.getAllTextureIds`](docs/api/getAllTextureIds.md) - Get all file names defined in all of your sprite sheets
 
 [Full API docs](docs/README.md)
 

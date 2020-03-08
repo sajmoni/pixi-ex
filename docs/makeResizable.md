@@ -1,9 +1,3 @@
----
-name: makeResizable
----
-
-# makeResizable
-
 ```js
 ex.makeResizable(text)
 ```

@@ -1,14 +1,10 @@
----
-name: drawHitArea
----
-
-# drawHitArea
-
 ```js
 ex.drawHitArea(displayObject, graphics)
 ```
 
-Will display the `hitArea` for a `PIXI.DisplayObject`, if defined. Otherwise the width and height will be used. Returns a `render` function that needs to be called on each game update.
+Will display the `hitArea` for a `PIXI.DisplayObject`, if defined. Otherwise the `width` and `height` will be used. Returns a `render` function that needs to be called on each game update.
+
+This function is only meant to be used for debugging.
 
 ## Arguments
 

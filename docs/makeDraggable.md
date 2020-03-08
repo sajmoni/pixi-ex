@@ -1,9 +1,3 @@
----
-name: makeDraggable
----
-
-# makeDraggable
-
 ```js
 ex.makeDraggable(displayObject, options)
 ```

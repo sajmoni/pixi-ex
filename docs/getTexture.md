@@ -1,9 +1,3 @@
----
-name: getTexture
----
-
-# getTexture
-
 ```js
 ex.getTexture(fileName)
 ```
@@ -24,4 +18,6 @@ _Note. Texture names need to be unique across all sprite sheets_
 
 ```js
 new PIXI.Sprite(ex.getTexture('player'))
+
+new PIXI.AnimatedSprite(['enemy-0', 'enemy-1'].map(ex.getTexture))
 ```

@@ -1,9 +1,3 @@
----
-name: fromHex
----
-
-# angle
-
 ```js
 ex.fromHex(hexCode)
 ```
@@ -12,7 +6,7 @@ Convert a string containing a hexadecimal string to a hexadecimal literal (a num
 
 `“#******” => 0x******`
 
-The hexadecimal literal is for example required by PIXI.Graphics.
+The hexadecimal literal is for example required by `PIXI.Graphics`.
 
 ## Arguments
 

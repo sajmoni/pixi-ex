@@ -1,9 +1,3 @@
----
-name: isColliding
----
-
-# isColliding
-
 ```js
 ex.isColliding(displayObject, otherDisplayObject)
 ```

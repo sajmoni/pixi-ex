@@ -1,9 +1,3 @@
----
-name: getAllTextureIds
----
-
-# getAllTextureIds
-
 ```js
 ex.getAllTextureIds()
 ```

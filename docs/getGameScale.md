@@ -1,9 +1,3 @@
----
-name: getGameScale
----
-
-# getGameScale
-
 ```js
 ex.getGameScale()
 ```

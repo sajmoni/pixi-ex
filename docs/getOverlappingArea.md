@@ -1,9 +1,3 @@
----
-name: getOverlappingArea
----
-
-# getOverlappingArea
-
 ```js
 ex.getOverlappingArea(displayObject, otherDisplayObject)
 ```

@@ -14,33 +14,39 @@
 
 ---
 
-## Features
+[PixiJS](https://github.com/pixijs/pixi.js) is one of the most popular 2D WebGL libraries. This library aims to include some useful utilities to make PixiJS easier to work with.
 
-- [`ex.resize`](docs/api/resize.md) - Resize the canvas and retain the correct proportions
+---
 
-- [`ex.getTexture`](docs/api/getTexture.md) - Easily get pre-loaded textures
+## API
 
-- [`ex.getGlobalPosition`](docs/api/getGlobalPosition.md) - Get the global position of a display object
+- [`resize`](docs/resize.md) - Resize the canvas and retain the correct proportions
 
-- [`ex.getOverlappingArea`](docs/api/getOverlappingArea.md) - The area that two display objects are overlapping.
+- [`getTexture`](docs/getTexture.md) - Easily get pre-loaded textures
 
- - [`ex.drawHitArea`](docs/api/drawHitArea.md) - Draw a display objects `hitArea` if defined, otherwise width and height
+- [`getGlobalPosition`](docs/getGlobalPosition.md) - Get the global position of a display object
 
- - [`ex.isColliding`](docs/api/isColliding.md) - Returns true if two display objects are colliding / overlapping
+- [`getOverlappingArea`](docs/getOverlappingArea.md) - Get the area that two display objects are overlapping.
 
- - [`ex.fromHex`](docs/api/fromHex.md) - Convert `#ff00ff` to `0xff00ff`
+ - [`drawHitArea`](docs/drawHitArea.md) - Debug your display objects hit areas
 
- - [`ex.makeClickable`](docs/api/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
+ - [`isColliding`](docs/isColliding.md) - Returns true if two display objects are colliding / overlapping
+
+ - [`fromHex`](docs/fromHex.md) - Convert `#ff00ff` to `0xff00ff`
+
+ - [`makeClickable`](docs/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
  
- - [`ex.makeDraggable`](docs/api/makeDraggable.md) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
+ - [`makeDraggable`](docs/makeDraggable.md) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
  
- - [`ex.makeResizable`](docs/api/makeResizable.md) - Make text objects look good even when resized
+ - [`makeResizable`](docs/makeResizable.md) - Make text objects look good even when resized
  
- - [`ex.getAllChildren`](docs/api/getAllChildren.md) - Recursively get all children (including the input display object) from this point in the hierarchy, in a flat list.
+ - [`getAllChildren`](docs/getAllChildren.md) - Get all children (including the input display object) from this point in the hierarchy.
 
- - [`ex.getAllTextureIds`](docs/api/getAllTextureIds.md) - Get all file names defined in all of your sprite sheets
+ - [`getAllTextureIds`](docs/getAllTextureIds.md) - Get all file names defined in all of your sprite sheets
 
-[Full API docs](docs/README.md)
+- [`getGameScale`](api/getGameScale.md) - Get the game scale after resize
+
+- [`init`](api/init.md)
 
 ---
 
@@ -60,12 +66,15 @@ app.loader.add('assets/spritesheet.json')
 
 app.loader.load(() => {
   // Give pixi-ex a reference to the Pixi app. This function needs to be called before any other calls to pixi-ex.
+  // It also needs to be called after resources are loaded.
   ex.init(app)
   const square = new PIXI.Sprite(
     ex.getTexture('square'), // Assuming the spritesheet contains a 'square' texture
   )
 })
 ```
+
+Check out [`example/index.js`](example/index.js) for more example usages.
 
 ---
 
@@ -82,6 +91,8 @@ or
 ## Recipes
 
 ### Resize to full screen while retaining correct proportions
+
+Note: If your game is using pixel perfect rendering. This will make your pixels look distorted, so you probably want to avoid doing this.
 
 ```js
 const resizeGame = () => {

@@ -1,9 +1,3 @@
----
-name: getAllChildren
----
-
-# getAllChildren
-
 ```js
 ex.getAllChildren(displayObject)
 ```
@@ -12,7 +6,7 @@ Recursively get all descendants of a display object. Will return a flat list of 
 
 ## Arguments
 
-`displayObject` (PIXI.DisplayObject): Any object that inherits from PIXI.DisplayObject, such as PIXI.Sprite
+`displayObject` (PIXI.DisplayObject): Any object that inherits from `PIXI.DisplayObject`, such as `PIXI.Sprite`
 
 ## Returns
 

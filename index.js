@@ -11,6 +11,7 @@ const extractTextures = (app) => {
   const textureEntries = Object
     .values(app.loader.resources)
     .filter((resource) => resource.textures)
+    // @ts-ignore
     .flatMap((resource) => Object.entries(resource.textures))
 
   textureEntries.forEach(([key, texture]) => {
@@ -45,7 +46,7 @@ export const init = (app) => {
 
 const throwErrorIfNoInit = () => {
   if (!_app) {
-    throw new Error('ex.init has not been called')
+    throw new Error('pixi-ex: init has not been called')
   }
 }
 
@@ -102,7 +103,7 @@ export const resize = (width, height) => {
       Texts instead change size by setting their fontSize.
     */
   getAllChildren(_app.stage)
-    // Keep if resizable text object
+    // * Keep if resizable text object
     .filter((c) => c.originalFontSize)
     .forEach((displayObject) => {
       // eslint-disable-next-line no-param-reassign
@@ -112,7 +113,7 @@ export const resize = (width, height) => {
 }
 
 export const makeResizable = (textObject) => {
-  // This will probably break typechecking
+  // * This will probably break typechecking
   // eslint-disable-next-line no-param-reassign
   textObject.originalFontSize = textObject.style.fontSize
   // eslint-disable-next-line no-param-reassign
@@ -123,7 +124,7 @@ export const makeResizable = (textObject) => {
   textObject.scale.set(1 / ratio)
 }
 
-// makeDraggable
+// * makeDraggable
 const startEvents = [
   'mousedown',
   'touchstart',
@@ -180,7 +181,7 @@ const onDragStartInternal = (displayObject, onDragStart, disabler) => (event) =>
     return
   }
 
-  // This will probably break typechecking
+  // * This will probably break typechecking
   // eslint-disable-next-line no-param-reassign
   displayObject.dragData = event.data
   // eslint-disable-next-line no-param-reassign
@@ -206,7 +207,7 @@ const onDragEndInternal = (displayObject, onDragEnd, disabler) => () => {
   displayObject.dragData = null
 }
 
-// makeDraggable end
+// * makeDraggable end
 
 const CLICK_EVENTS = ['click', 'tap']
 
@@ -225,7 +226,6 @@ export const makeClickable = (displayObject, onClick) => {
 
 export const getGameScale = () => ratio
 
-// Convert #ff00ff to 0xff00ff
 export const fromHex = (color) => `0x${color.substring(1, color.length)}`
 
 export const getGlobalPosition = (displayObject) => {
@@ -304,13 +304,12 @@ export const drawHitArea = (displayObject, graphics) => {
   graphics.name = 'pixi-ex: drawHitArea'
   _app.stage.addChild(graphics)
 
-  // Needs to be called each game update
   const render = () => {
     if (!displayObject._destroyed) {
       const width = getWidth(displayObject)
       const height = getHeight(displayObject)
 
-      const { x, y } = getGlobalPosition(displayObject, ratio)
+      const { x, y } = getGlobalPosition(displayObject)
 
       graphics
         .clear()

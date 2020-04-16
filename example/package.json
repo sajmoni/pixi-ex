@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "refresh": "yarn cache clean && rm -rf node_modules && yarn --no-lockfile",
+    "refresh": "yarn cache clean && yarn --force --no-lockfile",
     "start": "parcel ./index.html --no-autoinstall --no-cache"
   },
   "dependencies": {

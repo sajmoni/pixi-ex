@@ -333,3 +333,16 @@ export const centerY = (displayObject, yPosition) => {
   // eslint-disable-next-line no-param-reassign
   displayObject.pivot.y = displayObject.height / 2
 }
+
+// * Make game fullscreen and resize when window is resized
+export const useAutoFullScreen = (onChange) => {
+  const resizeGame = () => {
+    const screenWidth = window.innerWidth
+    const screenHeight = window.innerHeight
+    resize(screenWidth, screenHeight)
+    onChange()
+  }
+
+  window.addEventListener('resize', resizeGame)
+  resizeGame()
+}

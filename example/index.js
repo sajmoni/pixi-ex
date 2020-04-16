@@ -17,26 +17,17 @@ app.loader.add('spritesheet.json')
 
 app.loader.load(() => {
   ex.init(app)
-  // * Make game fullscreen and resize when window is resized
-  const resizeGame = () => {
-    const scale = new PIXI.Text('', { fill: '#ffffff' })
-    scale.anchor.set(0.5)
-    scale.x = GAME_WIDTH / 2
-    scale.y = 20
-    ex.makeResizable(scale)
-    app.stage.addChild(scale)
 
-    const resize = () => {
-      const screenWidth = window.innerWidth
-      const screenHeight = window.innerHeight
-      ex.resize(screenWidth, screenHeight)
+  const scale = new PIXI.Text('', { fill: '#ffffff' })
+  scale.anchor.set(0.5)
+  scale.x = GAME_WIDTH / 2
+  scale.y = 20
+  ex.makeResizable(scale)
+  app.stage.addChild(scale)
 
-      scale.text = `Canvas will resize when window is resized. Scale: ${ex.getGameScale()}`
-    }
-    resize()
-    return resize
-  }
-  window.addEventListener('resize', resizeGame())
+  ex.useAutoFullScreen(() => {
+    scale.text = `Canvas will resize when window is resized. Scale: ${ex.getGameScale()}`
+  })
 
   const centeredText = new PIXI.Text('I am centered', { fill: 'lightblue' })
   ex.centerX(centeredText, GAME_WIDTH / 2)

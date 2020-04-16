@@ -17,9 +17,34 @@ app.loader.add('spritesheet.json')
 
 app.loader.load(() => {
   ex.init(app)
+  // * Make game fullscreen and resize when window is resized
+  const resizeGame = () => {
+    const scale = new PIXI.Text('', { fill: '#ffffff' })
+    scale.anchor.set(0.5)
+    scale.x = GAME_WIDTH / 2
+    scale.y = 20
+    ex.makeResizable(scale)
+    app.stage.addChild(scale)
+
+    const resize = () => {
+      const screenWidth = window.innerWidth
+      const screenHeight = window.innerHeight
+      ex.resize(screenWidth, screenHeight)
+
+      scale.text = `Canvas will resize when window is resized. Scale: ${ex.getGameScale()}`
+    }
+    resize()
+    return resize
+  }
+  window.addEventListener('resize', resizeGame())
+
+  const centeredText = new PIXI.Text('I am centered', { fill: 'lightblue' })
+  ex.centerX(centeredText, GAME_WIDTH / 2)
+  ex.centerY(centeredText, GAME_HEIGHT / 2)
+  app.stage.addChild(centeredText)
 
   const squareContainer = new PIXI.Container()
-  squareContainer.position = { x: 100, y: 100 }
+  squareContainer.position.set(100, 100)
   squareContainer.hitArea = new PIXI.Rectangle(0, 0, 300, 200)
   const renderHitArea = ex.drawHitArea(squareContainer, new PIXI.Graphics())
   app.ticker.add(renderHitArea)
@@ -99,26 +124,4 @@ app.loader.load(() => {
     clickMe.text = `Click me! Times clicked: ${clicked}`
   })
   app.stage.addChild(clickMe)
-
-  // Make game fullscreen and resize when window is resized
-  const resizeGame = () => {
-    const scale = new PIXI.Text('', { fill: '#ffffff' })
-    scale.anchor.set(0.5)
-    scale.x = GAME_WIDTH / 2
-    scale.y = 20
-    ex.makeResizable(scale)
-    app.stage.addChild(scale)
-
-    const resize = () => {
-      const screenWidth = window.innerWidth
-      const screenHeight = window.innerHeight
-      ex.resize(screenWidth, screenHeight)
-
-      scale.text = `Canvas will resize when window is resized. Scale: ${ex.getGameScale()}`
-    }
-    resize()
-    return resize
-  }
-
-  window.addEventListener('resize', resizeGame())
 })

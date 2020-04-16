@@ -319,3 +319,17 @@ export const drawHitArea = (displayObject, graphics) => {
   }
   return render
 }
+
+export const centerX = (displayObject, xPosition) => {
+  // eslint-disable-next-line no-param-reassign
+  displayObject.x = xPosition
+  // eslint-disable-next-line no-param-reassign
+  displayObject.pivot.x = displayObject.width / 2
+}
+
+export const centerY = (displayObject, yPosition) => {
+  // eslint-disable-next-line no-param-reassign
+  displayObject.y = yPosition
+  // eslint-disable-next-line no-param-reassign
+  displayObject.pivot.y = displayObject.height / 2
+}

@@ -15,7 +15,7 @@
   },
   "scripts": {
     "clean": "rm -f pixi-ex.tgz",
-    "build-test": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && cd -",
+    "go": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && cd -",
     "build": "rm -rf dist && parcel build ./index.js --no-cache",
     "lint": "eslint index.js",
     "release": "yarn clean && yarn audit 6& yarn build && np",

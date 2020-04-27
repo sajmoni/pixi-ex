@@ -29,8 +29,7 @@
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.20.1",
     "np": "6.2.1",
-    "parcel-bundler": "1.12.4",
-    "pixi.js": "5.2.1"
+    "parcel-bundler": "1.12.4"
   },
   "dependencies": {
     "core-js": "3.6.5"

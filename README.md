@@ -41,6 +41,12 @@
  - [`makeResizable`](docs/makeResizable.md) - Make text objects look good even when resized
  
  - [`getAllChildren`](docs/getAllChildren.md) - Get all children (including the input display object) from this point in the hierarchy.
+ 
+ - [`centerX`](docs/centerX.md) - Center a display object on the horizontal axis.
+ 
+ - [`centerY`](docs/centerY.md) - Center a display object on the vertical axis.
+ 
+ - [`useAutoFullScreen`](docs/useAutoFullScreen.md) - Automatically resize canvas to be full screen.
 
  - [`getAllTextureIds`](docs/getAllTextureIds.md) - Get all file names defined in all of your sprite sheets
 
@@ -89,36 +95,6 @@ or
 ---
 
 ## Recipes
-
-### Resize to full screen while retaining correct proportions
-
-Note: If your game is using pixel perfect rendering. This will make your pixels look distorted, so you probably want to avoid doing this.
-
-```js
-const resizeGame = () => {
-  const screenWidth = window.innerWidth
-  const screenHeight = window.innerHeight
-  ex.resize(screenWidth, screenHeight)
-}
-resizeGame()
-
-window.addEventListener('resize', resizeGame)
-```
-
-If you want the game to be horizontally centered:
-
-```css
-#container {
-  display: flex;
-  justify-content: center;
-}
-```
-
-```html
-<div id="container">
-  <div id="game"></div>
-</div>
-```
 
 ### Make all text objects resizable
 

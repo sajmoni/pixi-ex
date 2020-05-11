@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import * as ex from './index'
+import * as ex from '.'
 
 const mockStage = {
   scale: { set: () => {} },
@@ -47,19 +47,18 @@ test('getAllTextureIds', (t) => {
 })
 
 test('getAllChildren', (t) => {
-  t.deepEqual(
-    ex.getAllChildren(mockStage),
-    [
-      mockStage.children[0].children[0],
-      mockStage.children[0],
-      mockStage.children[1],
-      mockStage,
-    ],
-  )
+  t.deepEqual(ex.getAllChildren(mockStage), [
+    mockStage.children[0].children[0],
+    mockStage.children[0],
+    mockStage.children[1],
+    mockStage,
+  ])
 })
 
 test('resize', (t) => {
-  t.notThrows(() => { ex.resize(1200, 1000) })
+  t.notThrows(() => {
+    ex.resize(1200, 1000)
+  })
 })
 
 test('centerX', (t) => {
@@ -80,19 +79,21 @@ test('centerY', (t) => {
 
 test('init - duplicate texture names across sprite sheets', (t) => {
   t.deepEqual(ex.getTexture('sprite1'), {})
-  t.throws(() => ex.init({
-    ...mockPixiApp,
-    loader: {
-      ...mockPixiApp.loader,
-      resources: {
-        ...mockPixiApp.loader.resources,
-        'spritesheet.json': {
-          textures: { 'sprite1.png': {} },
-        },
-        'spritesheet2.json': {
-          textures: { 'sprite1.png': {} },
+  t.throws(() =>
+    ex.init({
+      ...mockPixiApp,
+      loader: {
+        ...mockPixiApp.loader,
+        resources: {
+          ...mockPixiApp.loader.resources,
+          'spritesheet.json': {
+            textures: { 'sprite1.png': {} },
+          },
+          'spritesheet2.json': {
+            textures: { 'sprite1.png': {} },
+          },
         },
       },
-    },
-  }))
+    }),
+  )
 })

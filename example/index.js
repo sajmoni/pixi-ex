@@ -9,9 +9,7 @@ const app = new PIXI.Application({
   height: GAME_HEIGHT,
 })
 
-document
-  .getElementById('game')
-  .appendChild(app.view)
+document.querySelector('#game').append(app.view)
 
 app.loader.add('spritesheet.json')
 
@@ -59,10 +57,19 @@ app.loader.load(() => {
 
   app.ticker.add(() => {
     if (ex.isColliding(square1, square2)) {
-      square2.clear().beginFill(ex.fromHex('#00ff00')).drawRect(-16, -16, 32, 32).endFill()
+      square2
+        .clear()
+        .beginFill(ex.fromHex('#00ff00'))
+        .drawRect(-16, -16, 32, 32)
+        .endFill()
     } else {
-      square2.clear().beginFill(ex.fromHex('#0000ff')).drawRect(-16, -16, 32, 32).endFill()
+      square2
+        .clear()
+        .beginFill(ex.fromHex('#0000ff'))
+        .drawRect(-16, -16, 32, 32)
+        .endFill()
     }
+
     overlappingText.text = `${ex.getOverlappingArea(square1, square2)}`
   })
 
@@ -74,12 +81,15 @@ app.loader.load(() => {
   containerChildrenText.anchor.set(0.5)
   app.stage.addChild(containerChildrenText)
 
-  const getGlobalPositionTextContent = () => `Global: ${ex.getGlobalPosition(square1).x}, ${ex.getGlobalPosition(square1).y}`
+  const getGlobalPositionTextContent = () =>
+    `Global: ${ex.getGlobalPosition(square1).x}, ${
+      ex.getGlobalPosition(square1).y
+    }`
 
-  const globalPositionText = new PIXI.Text(
-    getGlobalPositionTextContent(),
-    { fill: '#ffffff', fontSize: 16 },
-  )
+  const globalPositionText = new PIXI.Text(getGlobalPositionTextContent(), {
+    fill: '#ffffff',
+    fontSize: 16,
+  })
   ex.makeResizable(globalPositionText)
   square1.addChild(globalPositionText)
 
@@ -90,7 +100,6 @@ app.loader.load(() => {
       globalPositionText.text = getGlobalPositionTextContent()
     },
   })
-
 
   const textureIdTitle = new PIXI.Text('Texture ids:', { fill: '#ffffff' })
   ex.makeResizable(textureIdTitle)
@@ -107,7 +116,9 @@ app.loader.load(() => {
   })
 
   let clicked = 0
-  const clickMe = new PIXI.Text(`Click me! Times clicked: ${clicked}`, { fill: '#ffffff' })
+  const clickMe = new PIXI.Text(`Click me! Times clicked: ${clicked}`, {
+    fill: '#ffffff',
+  })
   clickMe.position.set(GAME_WIDTH - 200, 400)
   clickMe.anchor.set(0.5)
   ex.makeClickable(clickMe, () => {

@@ -15,21 +15,42 @@
   },
   "scripts": {
     "clean": "rm -f pixi-ex.tgz",
-    "go": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && cd -",
-    "build": "rm -rf dist && parcel build ./index.js --no-cache",
-    "lint": "eslint index.js",
+    "go": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && yarn start",
+    "build": "rm -rf dist && rollup --config rollup.config.js",
     "release": "yarn clean && yarn audit 6& yarn build && np",
-    "test": "ava"
+    "test": "xo && ava"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "bracketSpacing": true
+  },
+  "xo": {
+    "prettier": true,
+    "env": [
+      "es2020",
+      "browser"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+      "@typescript-eslint/prefer-readonly-parameter-types": "off",
+      "unicorn/filename-case": "off",
+      "capitalized-comments": "off",
+      "dot-notation": "off"
+    }
   },
   "devDependencies": {
     "@babel/preset-env": "7.9.5",
     "@babel/register": "7.9.0",
+    "@rollup/plugin-typescript": "4.1.1",
     "ava": "3.7.0",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.0.0",
-    "eslint-plugin-import": "2.20.1",
     "np": "6.2.1",
-    "parcel-bundler": "1.12.4"
+    "pixi.js": "5.2.4",
+    "rollup": "2.9.0",
+    "typescript": "3.8.3",
+    "xo": "0.30.0"
   },
   "dependencies": {
     "core-js": "3.6.5"

@@ -15,7 +15,7 @@ type App = {
   readonly loader: PIXI.Loader
 }
 
-const extractTextures = (app: App | PIXI.Application) => {
+const extractTextures = (app: App | PIXI.Application): void => {
   const textureEntries: Array<[string, PIXI.Texture]> = Object.values(
     app.loader.resources,
   )
@@ -37,7 +37,7 @@ const extractTextures = (app: App | PIXI.Application) => {
   })
 }
 
-export const init = (app: App) => {
+export const init = (app: App | PIXI.Application): void => {
   gameWidth = app.renderer.width
   gameHeight = app.renderer.height
 
@@ -62,7 +62,7 @@ const throwErrorIfNoInit = () => {
   }
 }
 
-export const getTexture = (filename: string) => {
+export const getTexture = (filename: string): PIXI.Texture => {
   throwErrorIfNoInit()
 
   const texture = textureMap[filename]
@@ -80,7 +80,7 @@ export const getAllTextureIds = () => {
   return textureIds
 }
 
-export const getAllChildren = (container: PIXI.Container) => {
+export const getAllChildren = (container: PIXI.Container): PIXI.Container[] => {
   if (container.children.length > 0) {
     return (
       container.children
@@ -93,7 +93,7 @@ export const getAllChildren = (container: PIXI.Container) => {
   return [container]
 }
 
-export const resize = (width: number, height: number) => {
+export const resize = (width: number, height: number): void => {
   throwErrorIfNoInit()
 
   ratio = Math.min(width / gameWidth, height / gameHeight)
@@ -116,7 +116,7 @@ export const resize = (width: number, height: number) => {
     })
 }
 
-export const makeResizable = (textObject: PIXI.Text) => {
+export const makeResizable = (textObject: PIXI.Text): void => {
   // * This will break typechecking
   // @ts-ignore
   textObject.originalFontSize = textObject.style.fontSize
@@ -152,7 +152,7 @@ type DraggableOptions = {
 export const makeDraggable = (
   displayObject: PIXI.DisplayObject,
   options: DraggableOptions = {},
-) => {
+): void => {
   const {
     onDragStart = noop,
     onDragEnd = noop,
@@ -252,7 +252,7 @@ const CLICK_EVENTS = ['click', 'tap']
 export const makeClickable = (
   displayObject: PIXI.DisplayObject,
   onClick: (event: PIXI.interaction.InteractionEvent) => void,
-) => {
+): void => {
   displayObject.interactive = true
   displayObject.cursor = 'pointer'
 
@@ -263,7 +263,7 @@ export const makeClickable = (
   })
 }
 
-export const getGameScale = () => ratio
+export const getGameScale = (): number => ratio
 
 export const fromHex = (color: string): string =>
   `0x${color.slice(1, color.length)}`
@@ -291,7 +291,7 @@ const getHeight = (displayObject: PIXI.Container): number =>
 export const isColliding = (
   displayObject: PIXI.Container,
   otherDisplayObject: PIXI.Container,
-) => {
+): boolean => {
   const { x: entityX, y: entityY } = getGlobalPosition(displayObject)
 
   const entityWidth = getWidth(displayObject)
@@ -315,7 +315,7 @@ export const isColliding = (
 export const getOverlappingArea = (
   displayObject: PIXI.Container,
   otherDisplayObject: PIXI.Container,
-) => {
+): number => {
   if (!isColliding(displayObject, otherDisplayObject)) {
     return 0
   }
@@ -346,10 +346,12 @@ export const getOverlappingArea = (
   return dX * dY
 }
 
+type renderFn = () => void
+
 export const drawHitArea = (
   container: PIXI.Container,
   graphics: PIXI.Graphics,
-) => {
+): renderFn => {
   throwErrorIfNoInit()
 
   graphics.name = 'pixi-ex: drawHitArea'
@@ -370,18 +372,18 @@ export const drawHitArea = (
   return render
 }
 
-export const centerX = (container: PIXI.Container, xPosition: number) => {
+export const centerX = (container: PIXI.Container, xPosition: number): void => {
   container.x = xPosition
   container.pivot.x = container.width / 2
 }
 
-export const centerY = (container: PIXI.Container, yPosition: number) => {
+export const centerY = (container: PIXI.Container, yPosition: number): void => {
   container.y = yPosition
   container.pivot.y = container.height / 2
 }
 
 // * Make game fullscreen and resize when window is resized
-export const useAutoFullScreen = (onChange: () => void) => {
+export const useAutoFullScreen = (onChange: () => void): void => {
   const resizeGame = () => {
     const screenWidth = window.innerWidth
     const screenHeight = window.innerHeight

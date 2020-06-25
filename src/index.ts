@@ -207,7 +207,7 @@ const onDragStartInternal = (
   displayObject: PIXI.DisplayObject,
   onDragStart: (position: Position) => void,
   disabler: () => boolean,
-) => (event: PIXI.interaction.InteractionEvent) => {
+) => (event: PIXI.InteractionEvent) => {
   if (disabler()) {
     return
   }
@@ -251,13 +251,13 @@ const CLICK_EVENTS = ['click', 'tap']
 
 export const makeClickable = (
   displayObject: PIXI.DisplayObject,
-  onClick: (event: PIXI.interaction.InteractionEvent) => void,
+  onClick: (event: PIXI.InteractionEvent) => void,
 ): void => {
   displayObject.interactive = true
   displayObject.cursor = 'pointer'
 
   CLICK_EVENTS.forEach((clickEvent) => {
-    displayObject.on(clickEvent, (event: PIXI.interaction.InteractionEvent) => {
+    displayObject.on(clickEvent, (event: PIXI.InteractionEvent) => {
       onClick(event)
     })
   })

@@ -1,5 +1,4 @@
 import test from 'ava'
-
 import * as ex from '.'
 
 const mockStage = {
@@ -96,4 +95,8 @@ test('init - duplicate texture names across sprite sheets', (t) => {
       },
     }),
   )
+})
+
+test('fromHex', (t) => {
+  t.is(ex.fromHex('#ffffff'), 16777215)
 })

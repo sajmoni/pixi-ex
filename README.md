@@ -23,27 +23,27 @@
 
 - [`getGlobalPosition`](docs/getGlobalPosition.md) - Get the global position of a display object
 
-- [`getOverlappingArea`](docs/getOverlappingArea.md) - Get the area that two display objects are overlapping.
+- [`getOverlappingArea`](docs/getOverlappingArea.md) - Get overlapping area of two display objects
 
- - [`drawHitArea`](docs/drawHitArea.md) - Debug your display objects hit areas
+- [`drawHitArea`](docs/drawHitArea.md) - Debug your display objects hit areas
 
- - [`isColliding`](docs/isColliding.md) - Returns true if two display objects are colliding / overlapping
+- [`isColliding`](docs/isColliding.md) - Returns true if two display objects are colliding / overlapping
 
- - [`makeClickable`](docs/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
- 
- - [`makeDraggable`](docs/makeDraggable.md) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
- 
- - [`makeResizable`](docs/makeResizable.md) - Make text objects look good even when resized
- 
- - [`getAllChildren`](docs/getAllChildren.md) - Get all children (including the input display object) from this point in the hierarchy.
- 
- - [`centerX`](docs/centerX.md) - Center a display object on the horizontal axis.
- 
- - [`centerY`](docs/centerY.md) - Center a display object on the vertical axis.
- 
- - [`useAutoFullScreen`](docs/useAutoFullScreen.md) - Automatically resize canvas to be full screen.
+- [`makeClickable`](docs/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
 
- - [`getAllTextureIds`](docs/getAllTextureIds.md) - Get all file names defined in all of your sprite sheets
+- [`makeDraggable`](docs/makeDraggable.md) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
+
+- [`makeResizable`](docs/makeResizable.md) - Make text objects look good even when resized
+
+- [`getAllChildren`](docs/getAllChildren.md) - Get all children (including the input display object) from this point in the hierarchy.
+
+- [`centerX`](docs/centerX.md) - Center a display object on the horizontal axis.
+
+- [`centerY`](docs/centerY.md) - Center a display object on the vertical axis.
+
+- [`useAutoFullScreen`](docs/useAutoFullScreen.md) - Automatically resize canvas to be full screen.
+
+- [`getAllTextureIds`](docs/getAllTextureIds.md) - Get all file names defined in all of your sprite sheets
 
 - [`getGameScale`](api/getGameScale.md) - Get the game scale after resize
 
@@ -79,7 +79,7 @@ Check out [`example/index.js`](example/index.js) for more example usages.
 
 ---
 
-## Install
+## :package: Install
 
 `npm install pixi-ex`
 
@@ -89,7 +89,7 @@ or
 
 ---
 
-## Recipes
+## :book: Recipes
 
 ### Make all text objects resizable
 
@@ -111,6 +111,6 @@ export default (text, textStyle = {}) => {
 
 [`juice.js`](https://github.com/rymdkraftverk/juice.js) - Add "juice" to you animations to make them look nicer
 
-[`muncher`](https://github.com/sajmoni/muncher) - Automatically generate sprite sheets from the command line 
+[`muncher`](https://github.com/sajmoni/muncher) - Automatically generate sprite sheets from the command line
 
 [`level1`](https://github.com/rymdkraftverk/level1) - Delayed and repeated callback execution for games

@@ -1,5 +1,5 @@
 ```js
-ex.autoFullScreen(onChange)
+ex.useAutoFullscreen(onChange)
 ```
 
 Automatically resize canvas to be full screen.

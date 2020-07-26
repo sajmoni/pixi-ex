@@ -1,6 +1,6 @@
 {
   "name": "pixi-ex",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Pixi extended - Utility library for Pixi.js",
   "main": "./dist/index.js",
   "files": [

@@ -20,7 +20,7 @@ const extractTextures = (app: App | PIXI.Application): void => {
     app.loader.resources,
   )
     .filter((resource) => resource.textures)
-    // @ts-ignore
+    // @ts-expect-error
     .flatMap((resource) => Object.entries(resource.textures))
 
   textureEntries.forEach(([key, texture]) => {
@@ -84,7 +84,7 @@ export const getAllChildren = (container: PIXI.Container): PIXI.Container[] => {
   if (container.children.length > 0) {
     return (
       container.children
-        // @ts-ignore
+        // @ts-expect-error
         .flatMap((child: PIXI.Container) => getAllChildren(child))
         .concat(container)
     )
@@ -118,7 +118,7 @@ export const resize = (width: number, height: number): void => {
 
 export const makeResizable = (textObject: PIXI.Text): void => {
   // * This will break typechecking
-  // @ts-ignore
+  // @ts-expect-error
   textObject.originalFontSize = textObject.style.fontSize
   textObject.style = {
     ...textObject.style,
@@ -193,9 +193,9 @@ const onDragMoveInternal = (
     return
   }
 
-  // @ts-ignore
+  // @ts-expect-error
   if (displayObject.dragging) {
-    // @ts-ignore
+    // @ts-expect-error
     const { x, y } = displayObject.dragData.getLocalPosition(
       displayObject.parent,
     )
@@ -213,12 +213,12 @@ const onDragStartInternal = (
   }
 
   // * This will probably break typechecking
-  // @ts-ignore
+  // @ts-expect-error
   displayObject.dragData = event.data
-  // @ts-ignore
+  // @ts-expect-error
   displayObject.dragging = true
 
-  // @ts-ignore
+  // @ts-expect-error
   const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent)
 
   onDragStart({ x, y })
@@ -229,19 +229,19 @@ const onDragEndInternal = (
   onDragEnd: (position: Position) => void,
   disabler: () => boolean,
 ) => () => {
-  // @ts-ignore
+  // @ts-expect-error
   if (disabler() || !displayObject.dragData) {
     return
   }
 
-  // @ts-ignore
+  // @ts-expect-error
   const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent)
 
   onDragEnd({ x, y })
 
-  // @ts-ignore
+  // @ts-expect-error
   displayObject.dragging = false
-  // @ts-ignore
+  // @ts-expect-error
   displayObject.dragData = null
 }
 
@@ -277,13 +277,10 @@ export const getGlobalPosition = (
 }
 
 const getWidth = (displayObject: PIXI.Container): number =>
-  // @ts-ignore
-  (displayObject.hitArea && displayObject.hitArea.width) || displayObject.width
+  displayObject?.hitArea?.width || displayObject.width
 
 const getHeight = (displayObject: PIXI.Container): number =>
-  // @ts-ignore
-  (displayObject.hitArea && displayObject.hitArea.height) ||
-  displayObject.height
+  displayObject?.hitArea?.height || displayObject.height
 
 export const isColliding = (
   displayObject: PIXI.Container,
@@ -355,7 +352,7 @@ export const drawHitArea = (
   _app.stage.addChild(graphics)
 
   const render = () => {
-    // @ts-ignore
+    // @ts-expect-error
     if (!container._destroyed) {
       const width = getWidth(container)
       const height = getHeight(container)

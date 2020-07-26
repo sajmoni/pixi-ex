@@ -16,6 +16,7 @@
   "scripts": {
     "clean": "rm -f pixi-ex.tgz",
     "go": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && yarn start",
+    "qa": "tsc && xo --fix",
     "build": "rm -rf dist && rollup --config rollup.config.js",
     "release": "yarn clean && yarn audit 6& yarn build && np",
     "test": "ava"
@@ -42,18 +43,18 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "7.10.3",
-    "@babel/preset-env": "7.10.3",
-    "@babel/register": "7.10.3",
-    "@rollup/plugin-typescript": "5.0.0",
-    "ava": "3.9.0",
+    "@babel/core": "7.10.5",
+    "@babel/preset-env": "7.10.4",
+    "@babel/register": "7.10.5",
+    "@rollup/plugin-typescript": "5.0.2",
+    "ava": "3.10.1",
     "canvas": "2.6.1",
-    "jsdom": "16.2.2",
-    "np": "6.2.4",
-    "pixi.js": "5.3.0",
-    "rollup": "2.18.0",
-    "typescript": "3.9.5",
-    "xo": "0.32.0"
+    "jsdom": "16.3.0",
+    "np": "6.3.2",
+    "pixi.js": "5.3.1",
+    "rollup": "2.23.0",
+    "typescript": "3.9.7",
+    "xo": "0.32.1"
   },
   "peerDependencies": {
     "pixi.js": "5.x"

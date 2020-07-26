@@ -126,4 +126,19 @@ app.loader.load(() => {
     clickMe.text = `Click me! Times clicked: ${clicked}`
   })
   app.stage.addChild(clickMe)
+
+  const hoverMe = new PIXI.Text(`Hover me!`, {
+    fill: '#ffffff',
+  })
+  hoverMe.position.set(GAME_WIDTH - 200, 500)
+  hoverMe.anchor.set(0.5)
+  ex.makeHoverable(hoverMe, {
+    onOver: () => {
+      hoverMe.style.fill = '#ff0000'
+    },
+    onOut: () => {
+      hoverMe.style.fill = '#ffffff'
+    },
+  })
+  app.stage.addChild(hoverMe)
 })

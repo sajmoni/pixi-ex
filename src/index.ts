@@ -127,6 +127,23 @@ export const makeResizable = (textObject: PIXI.Text): void => {
   textObject.scale.set(1 / ratio)
 }
 
+export const makeHoverable = (
+  displayObject: PIXI.DisplayObject,
+  options: { onOver: () => void; onOut: () => void },
+) => {
+  const { onOver, onOut } = options
+
+  displayObject.interactive = true
+
+  displayObject.on('pointerover', () => {
+    onOver()
+  })
+
+  displayObject.on('pointerout', () => {
+    onOut()
+  })
+}
+
 // * makeDraggable
 const startEvents = ['mousedown', 'touchstart']
 
@@ -268,9 +285,13 @@ export const getGlobalPosition = (
 }
 
 const getWidth = (displayObject: PIXI.Container): number =>
+  // * This will break if hitArea is anything else than PIXI.Rectangle
+  // @ts-expect-error
   displayObject?.hitArea?.width || displayObject.width
 
 const getHeight = (displayObject: PIXI.Container): number =>
+  // * This will break if hitArea is anything else than PIXI.Rectangle
+  // @ts-expect-error
   displayObject?.hitArea?.height || displayObject.height
 
 export const isColliding = (

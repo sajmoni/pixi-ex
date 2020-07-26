@@ -94,7 +94,7 @@ app.loader.load(() => {
   square1.addChild(globalPositionText)
 
   ex.makeDraggable(square1, {
-    onDragMove: (position) => {
+    onMove: (position) => {
       // TODO: Put this into the makeDraggable?
       square1.position = position
       globalPositionText.text = getGlobalPositionTextContent()

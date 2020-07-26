@@ -143,9 +143,9 @@ type Position = {
 }
 
 type DraggableOptions = {
-  onDragStart?: (position: Position) => void
-  onDragEnd?: (position: Position) => void
-  onDragMove?: (position: Position) => void
+  onStart?: (position: Position) => void
+  onEnd?: (position: Position) => void
+  onMove?: (position: Position) => void
   disabler?: () => boolean
 }
 
@@ -154,39 +154,30 @@ export const makeDraggable = (
   options: DraggableOptions = {},
 ): void => {
   const {
-    onDragStart = noop,
-    onDragEnd = noop,
-    onDragMove = noop,
+    onStart = noop,
+    onEnd = noop,
+    onMove = noop,
     disabler = () => false,
   } = options
 
   displayObject.interactive = true
 
   startEvents.forEach((event) => {
-    displayObject.on(
-      event,
-      onDragStartInternal(displayObject, onDragStart, disabler),
-    )
+    displayObject.on(event, onStartInternal(displayObject, onStart, disabler))
   })
 
   endEvents.forEach((event) => {
-    displayObject.on(
-      event,
-      onDragEndInternal(displayObject, onDragEnd, disabler),
-    )
+    displayObject.on(event, onEndInternal(displayObject, onEnd, disabler))
   })
 
   moveEvents.forEach((event) => {
-    displayObject.on(
-      event,
-      onDragMoveInternal(displayObject, onDragMove, disabler),
-    )
+    displayObject.on(event, onMoveInternal(displayObject, onMove, disabler))
   })
 }
 
-const onDragMoveInternal = (
+const onMoveInternal = (
   displayObject: PIXI.DisplayObject,
-  onDragMove: (position: Position) => void,
+  onMove: (position: Position) => void,
   disabler: () => boolean,
 ) => () => {
   if (disabler()) {
@@ -199,13 +190,13 @@ const onDragMoveInternal = (
     const { x, y } = displayObject.dragData.getLocalPosition(
       displayObject.parent,
     )
-    onDragMove({ x, y })
+    onMove({ x, y })
   }
 }
 
-const onDragStartInternal = (
+const onStartInternal = (
   displayObject: PIXI.DisplayObject,
-  onDragStart: (position: Position) => void,
+  onStart: (position: Position) => void,
   disabler: () => boolean,
 ) => (event: PIXI.InteractionEvent) => {
   if (disabler()) {
@@ -221,12 +212,12 @@ const onDragStartInternal = (
   // @ts-expect-error
   const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent)
 
-  onDragStart({ x, y })
+  onStart({ x, y })
 }
 
-const onDragEndInternal = (
+const onEndInternal = (
   displayObject: PIXI.DisplayObject,
-  onDragEnd: (position: Position) => void,
+  onEnd: (position: Position) => void,
   disabler: () => boolean,
 ) => () => {
   // @ts-expect-error
@@ -237,7 +228,7 @@ const onDragEndInternal = (
   // @ts-expect-error
   const { x, y } = displayObject.dragData.getLocalPosition(displayObject.parent)
 
-  onDragEnd({ x, y })
+  onEnd({ x, y })
 
   // @ts-expect-error
   displayObject.dragging = false

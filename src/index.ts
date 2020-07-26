@@ -265,9 +265,6 @@ export const makeClickable = (
 
 export const getGameScale = (): number => ratio
 
-export const fromHex = (color: string): number =>
-  Number.parseInt(`0x${color.slice(1, color.length)}`, 16)
-
 export const getGlobalPosition = (
   displayObject: PIXI.DisplayObject,
 ): { x: number; y: number } => {

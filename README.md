@@ -32,8 +32,6 @@
 
  - [`isColliding`](docs/isColliding.md) - Returns true if two display objects are colliding / overlapping
 
- - [`fromHex`](docs/fromHex.md) - Convert `#ff00ff` to `0xff00ff`
-
  - [`makeClickable`](docs/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
  
  - [`makeDraggable`](docs/makeDraggable.md) - Make a display object "draggable". Opacity is set to `0.5` while dragging.

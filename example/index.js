@@ -59,13 +59,13 @@ app.loader.load(() => {
     if (ex.isColliding(square1, square2)) {
       square2
         .clear()
-        .beginFill(ex.fromHex('#00ff00'))
+        .beginFill(PIXI.utils.string2hex('#00ff00'))
         .drawRect(-16, -16, 32, 32)
         .endFill()
     } else {
       square2
         .clear()
-        .beginFill(ex.fromHex('#0000ff'))
+        .beginFill(PIXI.utils.string2hex('#0000ff'))
         .drawRect(-16, -16, 32, 32)
         .endFill()
     }

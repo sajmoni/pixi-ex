@@ -1,5 +1,4 @@
 // eslint-disable-next-line import/no-unassigned-import
-import 'core-js/es/array/flat-map'
 import * as PIXI from 'pixi.js'
 
 let _app: App

@@ -109,9 +109,13 @@ export const resize = (width: number, height: number): void => {
   getAllChildren(_app.stage)
     // * Keep if resizable text object
     .filter((child: any) => child.originalFontSize)
-    .forEach((container: any) => {
-      container.style.fontSize = container.originalFontSize * ratio
-      container.scale.set(1 / ratio)
+    .forEach((resizableTextObject: any) => {
+      resizableTextObject.style.fontSize =
+        resizableTextObject.originalFontSize * ratio
+      resizableTextObject.scale.set(
+        resizableTextObject.originalScale.x / ratio,
+        resizableTextObject.originalScale.y / ratio,
+      )
     })
 }
 
@@ -119,11 +123,18 @@ export const makeResizable = (textObject: PIXI.Text): void => {
   // * This will break typechecking
   // @ts-expect-error
   textObject.originalFontSize = textObject.style.fontSize
+  // @ts-expect-error
+  textObject.originalScale = { x: textObject.scale.x, y: textObject.scale.y }
   textObject.style = {
     ...textObject.style,
     fontSize: textObject.style.fontSize * ratio,
   }
-  textObject.scale.set(1 / ratio)
+  textObject.scale.set(
+    // @ts-expect-error
+    textObject.originalScale.x / ratio,
+    // @ts-expect-error
+    textObject.originalScale.y / ratio,
+  )
 }
 
 export const makeHoverable = (

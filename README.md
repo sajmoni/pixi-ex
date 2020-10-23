@@ -13,6 +13,8 @@
 
 [PixiJS](https://github.com/pixijs/pixi.js) is one of the most popular 2D WebGL libraries. This library aims to include some useful utilities to make PixiJS easier to work with.
 
+*`pixi.ex` has zero dependencies*
+
 ---
 
 ## API

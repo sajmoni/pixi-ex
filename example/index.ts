@@ -141,4 +141,9 @@ app.loader.load(() => {
     },
   })
   app.stage.addChild(hoverMe)
+
+  // * Grid overlay
+  const gridGraphics = new PIXI.Graphics()
+  app.stage.addChild(gridGraphics)
+  ex.showGrid({ graphics: gridGraphics, numberOfCells: 2, color: 0xff00ff })
 })

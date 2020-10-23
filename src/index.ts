@@ -400,3 +400,31 @@ export const useAutoFullScreen = (onChange: () => void): void => {
   window.addEventListener('resize', resizeGame)
   resizeGame()
 }
+
+/**
+ * Show a grid overlay to help with positioning.
+ * You have to add the graphics object to the stage yourself.
+ * Does not work if the screen has been resized
+ */
+export const showGrid = ({
+  numberOfCells = 2,
+  color = 0xffffff,
+  graphics,
+}: {
+  numberOfCells: number
+  color: number
+  graphics: PIXI.Graphics
+}): void => {
+  throwErrorIfNoInit()
+
+  graphics.clear().lineStyle(2, color, 1)
+
+  const width = _app.renderer.width / numberOfCells
+  const height = _app.renderer.height / numberOfCells
+
+  for (let x = 0; x < numberOfCells; x++) {
+    for (let y = 0; y < numberOfCells; y++) {
+      graphics.drawRect(x * width, y * height, width, height)
+    }
+  }
+}

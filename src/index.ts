@@ -1,11 +1,10 @@
-// eslint-disable-next-line import/no-unassigned-import
 import * as PIXI from 'pixi.js'
 
 let _app: App
 let ratio = 1
 let gameWidth: number
 let gameHeight: number
-const textureMap: { [key: string]: PIXI.Texture } = {}
+const textureMap: Record<string, PIXI.Texture> = {}
 const textureIds: string[] = []
 
 type App = {

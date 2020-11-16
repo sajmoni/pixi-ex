@@ -18,7 +18,7 @@
     "go": "yarn clean && yarn build && yarn pack --filename pixi-ex.tgz && cd example && yarn refresh && yarn start",
     "qa": "tsc && xo --fix",
     "build": "rm -rf dist && rollup --config rollup.config.js",
-    "release": "yarn clean && yarn audit 6& yarn build && np",
+    "release": "yarn clean && yarn audit && yarn test && yarn build && np",
     "test": "ava"
   },
   "prettier": {

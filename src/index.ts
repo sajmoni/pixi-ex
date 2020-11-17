@@ -16,10 +16,9 @@ type App = {
 const extractTextures = (app: App | PIXI.Application): void => {
   const textureEntries: Array<[string, PIXI.Texture]> = Object.values(
     app.loader.resources,
+  ).flatMap((resource) =>
+    resource.textures ? Object.entries(resource.textures) : [],
   )
-    .filter((resource) => resource.textures)
-    // @ts-expect-error
-    .flatMap((resource) => Object.entries(resource.textures))
 
   textureEntries.forEach(([key, texture]) => {
     const name = key.slice(0, -4)

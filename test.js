@@ -1,5 +1,4 @@
 import test from 'ava'
-import * as ex from '.'
 
 const mockStage = {
   scale: { set: () => {} },
@@ -8,6 +7,7 @@ const mockStage = {
     { name: 'child2', children: [] },
   ],
 }
+import * as ex from './src'
 
 const mockPixiApp = {
   stage: mockStage,

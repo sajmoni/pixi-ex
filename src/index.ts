@@ -78,14 +78,13 @@ export const getAllTextureIds = () => {
   return textureIds
 }
 
-export const getAllChildren = (container: PIXI.Container): PIXI.Container[] => {
-  if (container.children.length > 0) {
-    return (
-      container.children
-        // @ts-expect-error
-        .flatMap((child: PIXI.Container) => getAllChildren(child))
-        .concat(container)
-    )
+export const getAllChildren = (
+  container: PIXI.DisplayObject,
+): PIXI.DisplayObject[] => {
+  if (container instanceof PIXI.Container) {
+    return container.children
+      .flatMap((child) => getAllChildren(child))
+      .concat(container)
   }
 
   return [container]

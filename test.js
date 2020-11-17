@@ -1,13 +1,23 @@
 import test from 'ava'
+import * as PIXI from 'pixi.js'
 
-const mockStage = {
-  scale: { set: () => {} },
-  children: [
-    { name: 'child1', children: [{ name: 'grandchild', children: [] }] },
-    { name: 'child2', children: [] },
-  ],
-}
 import * as ex from './src'
+
+const displayObject = new PIXI.DisplayObject()
+displayObject.name = 'displayObject'
+const grandChild = new PIXI.Container()
+grandChild.name = 'grandChild'
+const child1 = new PIXI.Container()
+child1.name = 'child1'
+child1.addChild(grandChild)
+const child2 = new PIXI.Container()
+child2.name = 'child2'
+
+const mockStage = new PIXI.Container()
+mockStage.name = 'stage'
+mockStage.addChild(child1)
+mockStage.addChild(child2)
+mockStage.addChild(displayObject)
 
 const mockPixiApp = {
   stage: mockStage,
@@ -46,12 +56,16 @@ test('getAllTextureIds', (t) => {
 })
 
 test('getAllChildren', (t) => {
-  t.deepEqual(ex.getAllChildren(mockStage), [
-    mockStage.children[0].children[0],
-    mockStage.children[0],
-    mockStage.children[1],
-    mockStage,
-  ])
+  t.deepEqual(
+    ex.getAllChildren(mockStage).map((child) => child.name),
+    [
+      grandChild.name,
+      child1.name,
+      child2.name,
+      displayObject.name,
+      mockStage.name,
+    ],
+  )
 })
 
 test('resize', (t) => {

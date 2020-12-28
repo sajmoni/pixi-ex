@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import { getCells } from './internal'
 
 let _app: App
 let ratio = 1
@@ -426,12 +427,10 @@ export const showGrid = ({
 
   graphics.clear().lineStyle(2, color, 1)
 
-  const width = _app.renderer.width / numberOfCells
-  const height = _app.renderer.height / numberOfCells
-
-  for (let x = 0; x < numberOfCells; x++) {
-    for (let y = 0; y < numberOfCells; y++) {
-      graphics.drawRect(x * width, y * height, width, height)
-    }
-  }
+  const { resolution, width, height } = _app.renderer
+  const cells = getCells({ resolution, width, height, numberOfCells, scale: ratio })
+  
+  cells.forEach(({x, y, width, height}) => {
+    graphics.drawRect(x, y, width, height)
+  })
 }

@@ -2,6 +2,7 @@ import test from 'ava'
 import * as PIXI from 'pixi.js'
 
 import * as ex from './src'
+import * as internal from './src/internal'
 
 const displayObject = new PIXI.DisplayObject()
 displayObject.name = 'displayObject'
@@ -17,6 +18,7 @@ const mockStage = new PIXI.Container()
 mockStage.name = 'stage'
 mockStage.addChild(child1)
 mockStage.addChild(child2)
+
 mockStage.addChild(displayObject)
 
 const mockPixiApp = {
@@ -40,6 +42,7 @@ test('some functions throw errors before init is called', (t) => {
   t.throws(ex.getAllTextureIds)
   t.throws(ex.drawHitArea)
   t.throws(ex.resize)
+  t.throws(ex.showGrid)
   ex.init(mockPixiApp)
 })
 
@@ -73,6 +76,37 @@ test('resize', (t) => {
     ex.resize(1200, 1000)
   })
 })
+
+test('showGrid', (t) => {
+  t.notThrows(() => {
+    const graphics = new PIXI.Graphics()
+    const gridGraphics = ex.showGrid({
+      numberOfCells: 2,
+      graphics,
+      color: 0xffffff
+    })
+  })
+})
+
+const expectedCells = [
+  {x: 0, y: 0}, 
+  {x: 0, y: 125},
+  {x: 250, y: 0},
+  {x: 250, y: 125},
+].map((cell) => ({ ... cell, width: 250, height: 125}))
+
+test('getCells - resolution === 1, scale === 2', (t) => {
+  const cells = internal.getCells({ width: 1000, height: 500, numberOfCells: 2, resolution: 1, scale: 2})
+
+  t.deepEqual(cells, expectedCells)
+})
+
+test('getCells - resolution === 2, , scale === 1', (t) => {
+  const cells = internal.getCells({ width: 1000, height: 500, numberOfCells: 2, resolution: 2, scale: 1})
+
+  t.deepEqual(cells, expectedCells)
+})
+
 
 test('centerX', (t) => {
   const displayObject = { width: 100, x: 0, pivot: { x: 0 } }

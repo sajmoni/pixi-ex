@@ -4,6 +4,7 @@ import * as ex from 'pixi-ex'
 const GAME_WIDTH = 1280
 const GAME_HEIGHT = 720
 
+// PIXI.settings.RESOLUTION = 2
 const app = new PIXI.Application({
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
@@ -145,5 +146,5 @@ app.loader.load(() => {
   // * Grid overlay
   const gridGraphics = new PIXI.Graphics()
   app.stage.addChild(gridGraphics)
-  ex.showGrid({ graphics: gridGraphics, numberOfCells: 2, color: 0xff00ff })
+  ex.showGrid({ graphics: gridGraphics, numberOfCells: 4, color: 0xff00ff })
 })

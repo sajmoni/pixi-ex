@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild index.ts --bundle --format=iife --outfile=index.js",
+    "start": "serve -s"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.13.2",
+    "serve": "^12.0.1"
+  },
+  "dependencies": {
+    "pixi.js": "^6.1.3"
+  }
+}

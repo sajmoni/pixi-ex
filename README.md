@@ -13,7 +13,7 @@
 
 [PixiJS](https://github.com/pixijs/pixi.js) is one of the most popular 2D WebGL libraries. This library aims to include some useful utilities to make PixiJS easier to work with.
 
-*`pixi.ex` has zero dependencies*
+_`pixi.ex` has zero dependencies_
 
 ---
 
@@ -51,6 +51,10 @@
 
 - [`init`](api/init.md)
 
+### Constructors
+
+### Helpers
+
 ---
 
 ## Example usage
@@ -77,7 +81,7 @@ app.loader.load(() => {
 })
 ```
 
-Check out [`example/index.js`](example/index.js) for more example usages.
+Check out [`app/index.js`](app/index.js) for more example usages.
 
 ---
 
@@ -88,31 +92,3 @@ Check out [`example/index.js`](example/index.js) for more example usages.
 or
 
 `yarn add pixi-ex`
-
----
-
-## :book: Recipes
-
-### Make all text objects resizable
-
-If you are making a resizable game, you probably want all text objects to look good when resized.
-
-In that case, you might want to wrap the `Pixi.Text` constructor.
-
-```js
-export default (text, textStyle = {}) => {
-  const textObject = new PIXI.Text(text, textStyle)
-  ex.makeResizable(textObject)
-  return textObject
-}
-```
-
----
-
-## See also
-
-[`juice.js`](https://github.com/rymdkraftverk/juice.js) - Add "juice" to you animations to make them look nicer
-
-[`muncher`](https://github.com/sajmoni/muncher) - Automatically generate sprite sheets from the command line
-
-[`level1`](https://github.com/rymdkraftverk/level1) - Delayed and repeated callback execution for games

@@ -6,6 +6,12 @@
   "files": [
     "/dist"
   ],
+  "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajmoni/pixi-ex.git"
+  },
   "scripts": {
     "go": "npm run build && preview && npm test",
     "release": "npm run build && np --no-tests",
@@ -13,8 +19,6 @@
     "app": "npm run build && preview && cd app && npm run build && npm run start",
     "build": "rm -rf dist && tsc"
   },
-  "author": "",
-  "license": "ISC",
   "ava": {
     "require": [
       "esbuild-runner/register"

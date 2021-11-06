@@ -150,12 +150,14 @@ export const drawHitArea = (
 }
 
 // * Make game fullscreen and resize when window is resized
-export const useAutoFullScreen = (onChange: () => void): void => {
+export const useAutoFullScreen = (onChange?: () => void): void => {
   const resizeGame = () => {
     const screenWidth = window.innerWidth
     const screenHeight = window.innerHeight
     resize(screenWidth, screenHeight)
-    onChange()
+    if (onChange) {
+      onChange()
+    }
   }
 
   window.addEventListener('resize', resizeGame)

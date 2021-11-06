@@ -24,11 +24,9 @@ export const sprite = (
 
 export const animatedSprite = (
   parent: PIXI.Container,
-  textureNames?: string[],
+  textureNames: string[],
 ): PIXI.AnimatedSprite => {
-  const a = new PIXI.AnimatedSprite(
-    textureNames ? getTextures(textureNames) : [],
-  )
+  const a = new PIXI.AnimatedSprite(getTextures(textureNames))
 
   a.anchor.set(0.5)
   a.animationSpeed = 0.02

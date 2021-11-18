@@ -58,3 +58,16 @@ export const getAllChildren = (
 
   return [container]
 }
+
+/**
+ * A draw rect function that actually takes a rect
+ */
+export const drawRect = (
+  graphics: Graphics,
+  rectangle:
+    | Rectangle
+    | { x: number; y: number; width: number; height: number },
+): Graphics => {
+  graphics.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+  return graphics
+}

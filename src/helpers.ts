@@ -1,12 +1,17 @@
 import * as PIXI from 'pixi.js'
+import { Graphics, Rectangle } from 'pixi.js'
 
 /**
  * After clearing you need to set beginFill again. This can be easy to miss
  * so therefore I combined them into one call
  */
-export const prepareFill = (graphics: PIXI.Graphics, color: number): void => {
+export const prepareFill = (
+  graphics: PIXI.Graphics,
+  color: number,
+): Graphics => {
   graphics.clear()
   graphics.beginFill(color)
+  return graphics
 }
 
 export const setPosition = (

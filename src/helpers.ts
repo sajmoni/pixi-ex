@@ -1,21 +1,17 @@
-import * as PIXI from 'pixi.js'
-import { Graphics, Rectangle } from 'pixi.js'
+import { Container, DisplayObject, Graphics, Rectangle } from 'pixi.js'
 
 /**
  * After clearing you need to set beginFill again. This can be easy to miss
  * so therefore I combined them into one call
  */
-export const prepareFill = (
-  graphics: PIXI.Graphics,
-  color: number,
-): Graphics => {
+export const prepareFill = (graphics: Graphics, color: number): Graphics => {
   graphics.clear()
   graphics.beginFill(color)
   return graphics
 }
 
 export const setPosition = (
-  displayObject: PIXI.DisplayObject,
+  displayObject: Container,
   position: { x: number; y: number },
 ) => {
   displayObject.position.set(position.x, position.y)
@@ -24,7 +20,7 @@ export const setPosition = (
 /**
  * Use hitArea width if it exists
  */
-export const getWidth = (displayObject: PIXI.Container): number =>
+export const getWidth = (displayObject: Container): number =>
   // * This will break if hitArea is anything else than PIXI.Rectangle
   // @ts-expect-error
   displayObject?.hitArea?.width || displayObject.width
@@ -32,17 +28,17 @@ export const getWidth = (displayObject: PIXI.Container): number =>
 /**
  * Use hitArea height if it exists
  */
-export const getHeight = (displayObject: PIXI.Container): number =>
+export const getHeight = (displayObject: Container): number =>
   // * This will break if hitArea is anything else than PIXI.Rectangle
   // @ts-expect-error
   displayObject?.hitArea?.height || displayObject.height
 
-export const centerX = (container: PIXI.Container, xPosition: number): void => {
+export const centerX = (container: Container, xPosition: number): void => {
   container.x = xPosition
   container.pivot.x = container.width / 2
 }
 
-export const centerY = (container: PIXI.Container, yPosition: number): void => {
+export const centerY = (container: Container, yPosition: number): void => {
   container.y = yPosition
   container.pivot.y = container.height / 2
 }
@@ -52,10 +48,8 @@ export const centerY = (container: PIXI.Container, yPosition: number): void => {
  * @param container
  * @returns
  */
-export const getAllChildren = (
-  container: PIXI.DisplayObject,
-): PIXI.DisplayObject[] => {
-  if (container instanceof PIXI.Container) {
+export const getAllChildren = (container: DisplayObject): DisplayObject[] => {
+  if (container instanceof Container) {
     return container.children
       .flatMap((child) => getAllChildren(child))
       .concat(container)

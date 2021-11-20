@@ -1,6 +1,6 @@
 <img src="./pixi-ex.png">
 <h4 align="center">
-  Pixi extended - Utility functions for <a href="https://github.com/pixijs/pixi.js">PixiJS</a>
+  Pixi extended - Useful utilities for <a href="https://github.com/pixijs/pixi.js">PixiJS</a>
 </h4>
 
 <div align="center">
@@ -11,9 +11,10 @@
 
 ---
 
-[PixiJS](https://github.com/pixijs/pixi.js) is one of the most popular 2D WebGL libraries. This library aims to include some useful utilities to make PixiJS easier to work with.
+## Features
 
-_`pixi.ex` has zero dependencies_
+- TypeScript support
+- Zero dependencies
 
 ---
 
@@ -49,11 +50,44 @@ _`pixi.ex` has zero dependencies_
 
 - [`getGameScale`](api/getGameScale.md) - Get the game scale after resize
 
-- [`init`](api/init.md)
+- [`init`](api/init.md) - Required to be called before using certain features
 
 ### Constructors
 
+The purpose of these are:
+
+1. Shorter function names "new PIXI.Sprite()" -> "sprite()"
+2. Sensible defaults
+3. Automatically get texture(s)
+4. Prevents you from forgetting to add the object to a parent
+
+- sprite
+
+- animatedSprite
+
+- text
+
+- container
+
+- graphics
+
 ### Helpers
+
+- prepareFill
+
+- setPosition
+
+- getWidth
+
+- getHeight
+
+- centerX
+
+- centerY
+
+- getAllChildren
+
+- drawRect
 
 ---
 

@@ -3,12 +3,6 @@ import * as PIXI from 'pixi.js'
 import { getTexture, getTextures } from './core'
 import { makeResizable } from './modifiers'
 
-// Purpose of this:
-// 1. Shorter function names "new PIXI.Sprite()" -> "sprite()"
-// 2. Sensible defaults
-// 3. Automatically get texture
-// 4. Never forget to add it to a parent again (Parent is a required argument)
-
 export const sprite = (
   parent: PIXI.Container,
   textureName?: string,

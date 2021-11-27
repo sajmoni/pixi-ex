@@ -6,7 +6,7 @@
 <div align="center">
   <img src="https://badgen.net/npm/v/pixi-ex?icon=npm" />
   <img src="https://badgen.net/bundlephobia/minzip/pixi-ex" />
-  <img src="https://badgen.net/github/last-commit/sajmoni/pixi-ex?icon=github" />
+  <img src="https://badgen.net/github/last-commit/sajmoni/pixi-ex/main?icon=github" />
 </div>
 
 ---

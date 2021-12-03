@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import { Rectangle } from 'pixi.js'
 
 import { getTexture, getTextures } from './core'
 import { makeResizable } from './modifiers'
@@ -59,4 +60,21 @@ export const graphics = (parent: PIXI.Container): PIXI.Graphics => {
   const g = new PIXI.Graphics()
   parent.addChild(g)
   return g
+}
+
+/**
+ * Create a Rectangle from an object with x, y, width and height
+ */
+export const rectangle = (rectangle: {
+  x: number
+  y: number
+  width: number
+  height: number
+}) => {
+  return new Rectangle(
+    rectangle.x,
+    rectangle.y,
+    rectangle.width,
+    rectangle.height,
+  )
 }

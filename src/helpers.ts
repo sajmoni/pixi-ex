@@ -1,10 +1,9 @@
 import { Container, DisplayObject, Graphics, Rectangle } from 'pixi.js'
 
 /**
- * After clearing you need to set beginFill again. This can be easy to miss
- * so therefore I combined them into one call
+ * A beginFill function that also calls clear
  */
-export const prepareFill = (graphics: Graphics, color: number): Graphics => {
+export const beginFill = (graphics: Graphics, color: number): Graphics => {
   graphics.clear()
   graphics.beginFill(color)
   return graphics

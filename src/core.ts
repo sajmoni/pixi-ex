@@ -33,15 +33,14 @@ const extractTextures = (app: App | Application): void => {
   )
 
   textureEntries.forEach(([key, texture]) => {
-    const name = key.slice(0, -4)
-    textureIds.push(name)
+    textureIds.push(key)
 
-    if (textureMap[name]) {
+    if (textureMap[key]) {
       throw new Error(
-        `pixi-ex: Duplicate texture name found: ${name}. Texture names need to be unique`,
+        `pixi-ex: Duplicate texture name found: ${key}. Texture names need to be unique`,
       )
     } else {
-      textureMap[name] = texture
+      textureMap[key] = texture
     }
   })
 }

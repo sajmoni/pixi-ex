@@ -1,23 +1,32 @@
-import * as PIXI from 'pixi.js'
+import {
+  Application,
+  Container,
+  DisplayObject,
+  Graphics,
+  Loader,
+  Point,
+  Renderer,
+  Texture,
+} from 'pixi.js'
 import { getAllChildren, getHeight, getWidth } from './helpers'
 
 import { getCells } from './internal'
 
-let _app: App | PIXI.Application
+let _app: App | Application
 let ratio = 1
 let gameWidth: number
 let gameHeight: number
-const textureMap: Record<string, PIXI.Texture> = {}
+const textureMap: Record<string, Texture> = {}
 const textureIds: string[] = []
 
 type App = {
-  readonly renderer: PIXI.Renderer
-  readonly stage: PIXI.Container
-  readonly loader: PIXI.Loader
+  readonly renderer: Renderer
+  readonly stage: Container
+  readonly loader: Loader
 }
 
-const extractTextures = (app: App | PIXI.Application): void => {
-  const textureEntries: Array<[string, PIXI.Texture]> = Object.values(
+const extractTextures = (app: App | Application): void => {
+  const textureEntries: Array<[string, Texture]> = Object.values(
     app.loader.resources,
   ).flatMap((resource) =>
     resource.textures ? Object.entries(resource.textures) : [],
@@ -37,7 +46,7 @@ const extractTextures = (app: App | PIXI.Application): void => {
   })
 }
 
-export const init = (app: App | PIXI.Application): void => {
+export const init = (app: App | Application): void => {
   gameWidth = app.renderer.width
   gameHeight = app.renderer.height
 
@@ -62,7 +71,7 @@ const throwErrorIfNoInit = () => {
   }
 }
 
-export const getTexture = (filename: string): PIXI.Texture => {
+export const getTexture = (filename: string): Texture => {
   throwErrorIfNoInit()
 
   const texture = textureMap[filename]
@@ -74,7 +83,7 @@ export const getTexture = (filename: string): PIXI.Texture => {
   return texture
 }
 
-export const getTextures = (filenames: string[]): PIXI.Texture[] => {
+export const getTextures = (filenames: string[]): Texture[] => {
   let textures = []
 
   for (const filename of filenames) {
@@ -126,8 +135,8 @@ export const getGameScale = (): number => ratio
 type renderFn = () => void
 
 export const drawHitArea = (
-  container: PIXI.Container,
-  graphics: PIXI.Graphics,
+  container: Container,
+  graphics: Graphics,
 ): renderFn => {
   throwErrorIfNoInit()
 
@@ -176,7 +185,7 @@ export const showGrid = ({
 }: {
   numberOfCells: number
   color: number
-  graphics: PIXI.Graphics
+  graphics: Graphics
 }): void => {
   throwErrorIfNoInit()
 
@@ -197,9 +206,9 @@ export const showGrid = ({
 }
 
 export const getGlobalPosition = (
-  displayObject: PIXI.DisplayObject,
+  displayObject: DisplayObject,
 ): { x: number; y: number } => {
-  const global = displayObject.toGlobal(new PIXI.Point(0, 0))
+  const global = displayObject.toGlobal(new Point(0, 0))
   const ratio = getGameScale()
 
   return {

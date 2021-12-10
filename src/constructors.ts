@@ -7,13 +7,13 @@ import {
   Sprite,
   TextStyle,
   Text,
+  Texture,
 } from 'pixi.js'
 
-import { getTexture, getTextures } from './core'
 import { makeResizable } from './modifiers'
 
-export const sprite = (parent: Container, textureName?: string): Sprite => {
-  const s = new Sprite(textureName ? getTexture(textureName) : undefined)
+export const sprite = (parent: Container, texture?: Texture): Sprite => {
+  const s = new Sprite(texture ?? Texture.EMPTY)
 
   s.anchor.set(0.5)
 
@@ -24,9 +24,11 @@ export const sprite = (parent: Container, textureName?: string): Sprite => {
 
 export const animatedSprite = (
   parent: Container,
-  textureNames: string[],
+  textures?: Texture[],
 ): AnimatedSprite => {
-  const a = new AnimatedSprite(getTextures(textureNames))
+  const a = new AnimatedSprite(
+    textures && textures.length > 0 ? textures : [Texture.EMPTY],
+  )
 
   a.anchor.set(0.5)
   a.animationSpeed = 0.02

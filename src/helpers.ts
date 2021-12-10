@@ -9,6 +9,9 @@ export const beginFill = (graphics: Graphics, color: number): Graphics => {
   return graphics
 }
 
+/**
+ * Removes the need to access the x and y properties of a position
+ */
 export const setPosition = (
   displayObject: Container,
   position: { x: number; y: number },

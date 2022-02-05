@@ -10,18 +10,21 @@ import {
   Texture,
 } from 'pixi.js'
 
-import { makeResizable } from './modifiers'
-
+/**
+ * Create a Sprite
+ */
 export const sprite = (parent: Container, texture?: Texture): Sprite => {
   const s = new Sprite(texture ?? Texture.EMPTY)
-
-  s.anchor.set(0.5)
-
   parent.addChild(s)
 
   return s
 }
 
+/**
+ * Create an AnimatedSprite
+ *
+ * Auto-plays
+ */
 export const animatedSprite = (
   parent: Container,
   textures?: Texture[],
@@ -29,43 +32,47 @@ export const animatedSprite = (
   const a = new AnimatedSprite(
     textures && textures.length > 0 ? textures : [Texture.EMPTY],
   )
+  parent.addChild(a)
 
-  a.anchor.set(0.5)
   a.animationSpeed = 0.02
   a.play()
-
-  parent.addChild(a)
 
   return a
 }
 
+/**
+ * Create a Text
+ */
 export const text = (
   parent: Container,
   textStyle: Partial<ITextStyle>,
   textContent?: string,
 ): Text => {
   const t = new Text(textContent ?? '')
-
-  t.style = new TextStyle(textStyle)
-
   parent.addChild(t)
 
-  makeResizable(t)
-
-  t.anchor.set(0.5)
+  t.style = new TextStyle(textStyle)
 
   return t
 }
 
+/**
+ * Create a Container
+ */
 export const container = (parent: Container): Container => {
   const c = new Container()
   parent.addChild(c)
+
   return c
 }
 
+/**
+ * Create a Graphics object
+ */
 export const graphics = (parent: Container): Graphics => {
   const g = new Graphics()
   parent.addChild(g)
+
   return g
 }
 

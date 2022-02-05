@@ -13,7 +13,7 @@
 
 ## Features
 
-- TypeScript support
+- Written in TypeScript
 - Zero dependencies
 
 ---
@@ -56,26 +56,67 @@
 
 The purpose of these are:
 
-1. Shorter function names "new PIXI.Sprite()" -> "sprite()"
-2. Sensible defaults
-3. Automatically get texture(s)
-4. Prevents you from forgetting to add the object to a parent
+1. Always adds the object to a parent
+2. No need to use the `new` keyword ("new Sprite" -> "sprite")
+3. Animated sprite: Auto-plays
+4. Text: Enforces a text style to be set
 
-- sprite
+```ts
+sprite(parent: Container, texture?: Texture): Sprite
+```
 
-- animatedSprite
+```ts
+animatedSprite(parent: Container, textures?: Texture[]): AnimatedSprite
+```
 
-- text
+```ts
+text(parent: Container, textStyle: Partial<ITextStyle>, textContent?: string): Text
+```
 
-- container
+```ts
+container(parent: Container): Container
+```
 
-- graphics
+```ts
+graphics(parent: Container): Graphics
+```
+
+```ts
+rectangle(rectangle: {
+  x: number
+  y: number
+  width: number
+  height: number
+}): Rectangle
+```
+
+### Enhanced built-ins
+
+```ts
+beginFill(graphics: Graphics, color: number): Graphics
+```
+
+Also calls `clear`
+
+```ts
+setPosition(
+  displayObject: Container,
+  position: { x: number; y: number },
+): void
+```
+
+Accepts a `position` object
+
+```ts
+drawRect(
+  graphics: Graphics,
+  rectangle: Rectangle | { x: number; y: number; width: number; height: number },
+): Graphics
+```
+
+Accepts a `Rectangle`
 
 ### Helpers
-
-- prepareFill
-
-- setPosition
 
 - getWidth
 
@@ -86,8 +127,6 @@ The purpose of these are:
 - centerY
 
 - getAllChildren
-
-- drawRect
 
 ---
 

@@ -15,7 +15,7 @@ export const beginFill = (graphics: Graphics, color: number): Graphics => {
 export const setPosition = (
   displayObject: Container,
   position: { x: number; y: number },
-) => {
+): void => {
   displayObject.position.set(position.x, position.y)
 }
 
@@ -25,7 +25,7 @@ export const setPosition = (
 export const getWidth = (displayObject: Container): number =>
   // * This will break if hitArea is anything else than PIXI.Rectangle
   // @ts-expect-error
-  displayObject?.hitArea?.width || displayObject.width
+  displayObject?.hitArea?.width ?? displayObject.width
 
 /**
  * Use hitArea height if it exists
@@ -33,7 +33,7 @@ export const getWidth = (displayObject: Container): number =>
 export const getHeight = (displayObject: Container): number =>
   // * This will break if hitArea is anything else than PIXI.Rectangle
   // @ts-expect-error
-  displayObject?.hitArea?.height || displayObject.height
+  displayObject?.hitArea?.height ?? displayObject.height
 
 export const centerX = (container: Container, xPosition: number): void => {
   container.x = xPosition

@@ -1,4 +1,4 @@
-import { Container, DisplayObject, Graphics, Rectangle } from 'pixi.js'
+import { Container, type DisplayObject, type Graphics, type Rectangle } from 'pixi.js'
 
 /**
  * A beginFill function that also calls clear

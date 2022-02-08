@@ -2,12 +2,12 @@ import {
   AnimatedSprite,
   Container,
   Graphics,
-  ITextStyle,
   Rectangle,
   Sprite,
   TextStyle,
   Text,
   Texture,
+  type ITextStyle,
 } from 'pixi.js'
 
 /**

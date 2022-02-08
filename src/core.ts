@@ -1,15 +1,15 @@
-import {
+import type {
   Application,
   Container,
   DisplayObject,
   Graphics,
   Loader,
-  Point,
   Renderer,
   Texture,
 } from 'pixi.js'
-import { getAllChildren, getHeight, getWidth } from './helpers'
+import { Point } from 'pixi.js'
 
+import { getAllChildren, getHeight, getWidth } from './helpers'
 import { getCells } from './internal'
 
 let _app: App | Application

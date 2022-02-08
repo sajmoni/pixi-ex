@@ -1,10 +1,11 @@
-import * as PIXI from 'pixi.js'
+import type { DisplayObject, InteractionEvent, Text } from 'pixi.js'
+
 import { getGameScale } from './core'
 
 /**
- * Make it possible to resize PIXI.Text using the resize function
+ * Make it possible to resize Text using the resize function
  */
-export const makeResizable = (textObject: PIXI.Text): void => {
+export const makeResizable = (textObject: Text): void => {
   const ratio = getGameScale()
 
   // * This will break typechecking
@@ -26,7 +27,7 @@ export const makeResizable = (textObject: PIXI.Text): void => {
 }
 
 export const makeHoverable = (
-  displayObject: PIXI.DisplayObject,
+  displayObject: DisplayObject,
   options: { onOver: () => void; onOut: () => void },
 ) => {
   const { onOver, onOut } = options
@@ -45,14 +46,14 @@ export const makeHoverable = (
 const CLICK_EVENTS = ['click', 'tap']
 
 export const makeClickable = (
-  displayObject: PIXI.DisplayObject,
-  onClick: (event: PIXI.InteractionEvent) => void,
+  displayObject: DisplayObject,
+  onClick: (event: InteractionEvent) => void,
 ): void => {
   displayObject.interactive = true
   displayObject.cursor = 'pointer'
 
   CLICK_EVENTS.forEach((clickEvent) => {
-    displayObject.on(clickEvent, (event: PIXI.InteractionEvent) => {
+    displayObject.on(clickEvent, (event: InteractionEvent) => {
       onClick(event)
     })
   })

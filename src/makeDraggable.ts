@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js'
+import type { DisplayObject, InteractionEvent } from 'pixi.js'
 
 const startEvents = ['mousedown', 'touchstart']
 
@@ -22,7 +22,7 @@ type DraggableOptions = {
 }
 
 export const makeDraggable = (
-  displayObject: PIXI.DisplayObject,
+  displayObject: DisplayObject,
   options: DraggableOptions = {},
 ): void => {
   const {
@@ -49,7 +49,7 @@ export const makeDraggable = (
 
 const onMoveInternal =
   (
-    displayObject: PIXI.DisplayObject,
+    displayObject: DisplayObject,
     onMove: (position: Position) => void,
     disabler: () => boolean,
   ) =>
@@ -70,11 +70,11 @@ const onMoveInternal =
 
 const onStartInternal =
   (
-    displayObject: PIXI.DisplayObject,
+    displayObject: DisplayObject,
     onStart: (position: Position) => void,
     disabler: () => boolean,
   ) =>
-  (event: PIXI.InteractionEvent) => {
+  (event: InteractionEvent) => {
     if (disabler()) {
       return
     }
@@ -95,7 +95,7 @@ const onStartInternal =
 
 const onEndInternal =
   (
-    displayObject: PIXI.DisplayObject,
+    displayObject: DisplayObject,
     onEnd: (position: Position) => void,
     disabler: () => boolean,
   ) =>

@@ -1,10 +1,10 @@
-import type * as PIXI from 'pixi.js'
+import type { Container } from 'pixi.js'
 import { getGlobalPosition } from './core'
 import { getHeight, getWidth } from './helpers'
 
 export const isColliding = (
-  displayObject: PIXI.Container,
-  otherDisplayObject: PIXI.Container,
+  displayObject: Container,
+  otherDisplayObject: Container,
 ): boolean => {
   const { x: entityX, y: entityY } = getGlobalPosition(displayObject)
 
@@ -26,8 +26,8 @@ export const isColliding = (
 }
 
 export const getOverlappingArea = (
-  displayObject: PIXI.Container,
-  otherDisplayObject: PIXI.Container,
+  displayObject: Container,
+  otherDisplayObject: Container,
 ): number => {
   if (!isColliding(displayObject, otherDisplayObject)) {
     return 0

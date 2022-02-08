@@ -176,19 +176,11 @@ export const useAutoFullScreen = (onChange?: () => void): void => {
  * Show a grid overlay to help with positioning.
  * You have to add the graphics object to the stage yourself.
  * Does not work if the screen has been resized
+ *
+ * Set the lineStyle before passing in the graphics object.
  */
-export const showGrid = ({
-  numberOfCells = 2,
-  color = 0xffffff,
-  graphics,
-}: {
-  numberOfCells: number
-  color: number
-  graphics: Graphics
-}): void => {
+export const showGrid = (graphics: Graphics, numberOfCells = 2): void => {
   throwErrorIfNoInit()
-
-  graphics.clear().lineStyle(2, color, 1)
 
   const { resolution, width, height } = _app.renderer
   const cells = getCells({
@@ -199,9 +191,9 @@ export const showGrid = ({
     scale: ratio,
   })
 
-  cells.forEach(({ x, y, width, height }) => {
+  for (const { x, y, width, height } of cells) {
     graphics.drawRect(x, y, width, height)
-  })
+  }
 }
 
 export const getGlobalPosition = (

@@ -16,7 +16,7 @@
     "go": "npm run build && preview && npm test",
     "release": "npm run build && np --no-tests",
     "test": "ava",
-    "app": "npm run build && preview && cd app && npm run build && npm run start",
+    "app": "npm run build && preview && cd app && npm run dev",
     "build": "rm -rf dist && tsc"
   },
   "ava": {

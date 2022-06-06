@@ -129,7 +129,7 @@ app.loader.load(() => {
   )
   clickMe.position.set(GAME_WIDTH - 200, 400)
   clickMe.anchor.set(0.5)
-  ex.makeClickable(clickMe, () => {
+  ex.onClick(clickMe, () => {
     clicked += 1
     clickMe.text = `Click me! Times clicked: ${clicked}`
   })

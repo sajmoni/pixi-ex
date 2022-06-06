@@ -45,16 +45,16 @@ export const makeHoverable = (
 
 const CLICK_EVENTS = ['click', 'tap']
 
-export const makeClickable = (
+export const onClick = (
   displayObject: DisplayObject,
-  onClick: (event: InteractionEvent) => void,
+  callback: (event: InteractionEvent) => void,
 ): void => {
   displayObject.interactive = true
   displayObject.cursor = 'pointer'
 
   CLICK_EVENTS.forEach((clickEvent) => {
     displayObject.on(clickEvent, (event: InteractionEvent) => {
-      onClick(event)
+      callback(event)
     })
   })
 }

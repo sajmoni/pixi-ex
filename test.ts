@@ -1,6 +1,6 @@
 import test from 'ava'
 import * as ex from 'pixi-ex'
-import { Container } from 'pixi.js'
+import { Container, Graphics } from 'pixi.js'
 
 import * as internal from './src/internal'
 
@@ -38,26 +38,25 @@ const mockPixiApp = {
 }
 
 test('some functions throw errors before init is called', (t) => {
-  t.throws(() => ex.getTexture)
-  t.throws(() => ex.getAllTextureIds)
-  t.throws(() => ex.drawHitArea)
-  t.throws(() => ex.resize)
-  t.throws(() => ex.showGrid)
+  t.throws(() => ex.getTexture('sprite1.png'))
+  t.throws(() => ex.getAllTextureIds())
+  t.throws(() => ex.drawHitArea(new Container(), new Graphics()))
+  t.throws(() => ex.resize(10, 10))
+  t.throws(() => ex.showGrid(new Graphics()))
   //@ts-expect-error
   ex.init(mockPixiApp)
 })
 
 test('getTexture', (t) => {
-  //@ts-expect-error
-  t.deepEqual(ex.getTexture('sprite1'), {})
+  t.deepEqual(ex.getTexture('sprite1.png'), {})
 })
 
 test('getTexture - texture not found', (t) => {
-  t.throws(() => ex.getTexture('sprite2'))
+  t.throws(() => ex.getTexture('sprite2.png'))
 })
 
 test('getAllTextureIds', (t) => {
-  t.deepEqual(ex.getAllTextureIds(), ['sprite1'])
+  t.deepEqual(ex.getAllTextureIds(), ['sprite1.png'])
 })
 
 test('getAllChildren', (t) => {
@@ -73,14 +72,10 @@ test('resize', (t) => {
   })
 })
 
+// TODO: Enable this test again once pixi supports it
 test('showGrid', (t) => {
   t.notThrows(() => {
-    const graphics = new Graphics()
-    const gridGraphics = ex.showGrid({
-      numberOfCells: 2,
-      graphics,
-      color: 0xffffff,
-    })
+    ex.showGrid(new Graphics(), 2)
   })
 })
 
@@ -134,8 +129,7 @@ test('centerY', (t) => {
 })
 
 test('init - duplicate texture names across sprite sheets', (t) => {
-  //@ts-expect-error
-  t.deepEqual(ex.getTexture('sprite1'), {})
+  t.deepEqual(ex.getTexture('sprite1.png'), {})
   t.throws(() =>
     ex.init({
       ...mockPixiApp,

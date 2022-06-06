@@ -26,7 +26,7 @@ export const makeResizable = (textObject: Text): void => {
   )
 }
 
-export const makeHoverable = (
+export const onHover = (
   displayObject: DisplayObject,
   options: { onOver: () => void; onOut: () => void },
 ) => {

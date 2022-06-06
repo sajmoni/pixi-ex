@@ -143,7 +143,7 @@ app.loader.load(() => {
   )
   hoverMe.position.set(GAME_WIDTH - 200, 500)
   hoverMe.anchor.set(0.5)
-  ex.makeHoverable(hoverMe, {
+  ex.onHover(hoverMe, {
     onOver: () => {
       hoverMe.style.fill = '#ff0000'
     },

@@ -22,7 +22,7 @@ app.loader.load(() => {
   scale.anchor.set(0.5)
   scale.x = GAME_WIDTH / 2
   scale.y = 20
-  ex.makeResizable(scale)
+  ex.handleResize(scale)
 
   ex.useAutoFullScreen(() => {
     scale.text = `Canvas will resize when window is resized. Scale: ${ex.getGameScale()}`
@@ -96,7 +96,7 @@ app.loader.load(() => {
     },
     getGlobalPositionTextContent(),
   )
-  ex.makeResizable(globalPositionText)
+  ex.handleResize(globalPositionText)
   square1.addChild(globalPositionText)
 
   ex.onDrag(square1, {
@@ -108,13 +108,13 @@ app.loader.load(() => {
   })
 
   const textureIdTitle = ex.text(container, { fill: '#ffffff' }, 'Texture ids:')
-  ex.makeResizable(textureIdTitle)
+  ex.handleResize(textureIdTitle)
   textureIdTitle.position.set(GAME_WIDTH - 200, 200)
   textureIdTitle.anchor.set(0.5)
 
   ex.getAllTextureIds().forEach((textureId, index) => {
     const text = ex.text(container, { fill: '#ffffff' }, textureId)
-    ex.makeResizable(text)
+    ex.handleResize(text)
     text.position.set(GAME_WIDTH - 200, 250 + index * 50)
     text.anchor.set(0.5)
   })

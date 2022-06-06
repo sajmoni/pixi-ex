@@ -5,7 +5,7 @@ import { getGameScale } from './core'
 /**
  * Make it possible to resize Text using the resize function
  */
-export const makeResizable = (textObject: Text): void => {
+export const handleResize = (textObject: Text): void => {
   const ratio = getGameScale()
 
   // * This will break typechecking

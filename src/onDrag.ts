@@ -21,7 +21,7 @@ type DraggableOptions = {
   disabler?: () => boolean
 }
 
-export const makeDraggable = (
+export const onDrag = (
   displayObject: DisplayObject,
   options: DraggableOptions = {},
 ): void => {

@@ -99,9 +99,9 @@ app.loader.load(() => {
   ex.makeResizable(globalPositionText)
   square1.addChild(globalPositionText)
 
-  ex.makeDraggable(square1, {
+  ex.onDrag(square1, {
     onMove: (position) => {
-      // TODO: Put this into the makeDraggable?
+      // TODO: Put this into onDrag?
       square1.position.set(position.x, position.y)
       globalPositionText.text = getGlobalPositionTextContent()
     },

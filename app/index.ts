@@ -156,4 +156,6 @@ app.loader.load(() => {
   const gridGraphics = ex.graphics(container)
   gridGraphics.lineStyle(2, 0xff00ff, 0.5)
   ex.showGrid(gridGraphics, 4)
+
+  ex.showMousePosition(container)
 })

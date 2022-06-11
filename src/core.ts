@@ -8,6 +8,7 @@ import type {
   Texture,
 } from 'pixi.js'
 import { Point } from 'pixi.js'
+import { text } from './constructors'
 
 import { getAllChildren, getHeight, getWidth } from './helpers'
 import { getCells } from './internal'
@@ -206,4 +207,25 @@ export const getGlobalPosition = (
     x: global.x / ratio,
     y: global.y / ratio,
   }
+}
+
+export const showMousePosition = (container: Container) => {
+  throwErrorIfNoInit()
+
+  const _text = text(container, { fontSize: 16, fill: 'white' })
+  const { resolution } = _app.renderer
+
+  container.interactive = true
+  container.on('mousemove', (event) => {
+    const {
+      data: {
+        global: { x, y },
+      },
+    } = event
+
+    const scale = getGameScale()
+    _text.position.set(x / resolution / scale + 20, y / resolution / scale + 5)
+    _text.text = `x: ${x.toFixed(2)}
+y: ${y.toFixed(2)}`
+  })
 }

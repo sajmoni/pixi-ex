@@ -6,22 +6,21 @@ export const isColliding = (
   displayObject: Container,
   otherDisplayObject: Container,
 ): boolean => {
-  const { x: entityX, y: entityY } = getGlobalPosition(displayObject)
+  const { x, y } = getGlobalPosition(displayObject)
 
-  const entityWidth = getWidth(displayObject)
-  const entityHeight = getHeight(displayObject)
+  const width = getWidth(displayObject)
+  const height = getHeight(displayObject)
 
-  const { x: otherEntityX, y: otherEntityY } =
-    getGlobalPosition(otherDisplayObject)
+  const { x: otherX, y: otherY } = getGlobalPosition(otherDisplayObject)
 
-  const otherEntityWidth = getWidth(otherDisplayObject)
-  const otherEntityHeight = getHeight(otherDisplayObject)
+  const otherWidth = getWidth(otherDisplayObject)
+  const otherHeight = getHeight(otherDisplayObject)
 
   return (
-    entityX + entityWidth >= otherEntityX &&
-    otherEntityX + otherEntityWidth >= entityX &&
-    entityY + entityHeight >= otherEntityY &&
-    otherEntityY + otherEntityHeight >= entityY
+    x + width >= otherX &&
+    otherX + otherWidth >= x &&
+    y + height >= otherY &&
+    otherY + otherHeight >= y
   )
 }
 

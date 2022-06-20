@@ -1,4 +1,9 @@
-import { Container, type DisplayObject, type Graphics, type Rectangle } from 'pixi.js'
+import {
+  Container,
+  Rectangle,
+  type DisplayObject,
+  type Graphics,
+} from 'pixi.js'
 
 /**
  * A beginFill function that also calls clear
@@ -22,18 +27,30 @@ export const setPosition = (
 /**
  * Use hitArea width if it exists
  */
-export const getWidth = (displayObject: Container): number =>
-  // * This will break if hitArea is anything else than PIXI.Rectangle
-  // @ts-expect-error
-  displayObject?.hitArea?.width ?? displayObject.width
+export const getWidth = (object: Container): number => {
+  if (object.hitArea) {
+    if (object.hitArea instanceof Rectangle) {
+      return object.hitArea.width
+    }
+    throw new Error('hitArea used in getWidth is not a Rectangle')
+  }
+
+  return object.width
+}
 
 /**
  * Use hitArea height if it exists
  */
-export const getHeight = (displayObject: Container): number =>
-  // * This will break if hitArea is anything else than PIXI.Rectangle
-  // @ts-expect-error
-  displayObject?.hitArea?.height ?? displayObject.height
+export const getHeight = (object: Container): number => {
+  if (object.hitArea) {
+    if (object.hitArea instanceof Rectangle) {
+      return object.hitArea.height
+    }
+    throw new Error('hitArea used in getHeight is not a Rectangle')
+  }
+
+  return object.height
+}
 
 export const centerX = (container: Container, xPosition: number): void => {
   container.x = xPosition

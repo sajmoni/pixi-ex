@@ -32,9 +32,9 @@
 
 - [`isColliding`](docs/isColliding.md) - Returns true if two display objects are colliding / overlapping
 
-- [`makeClickable`](docs/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
+- [`onClick`](docs/onClick.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
 
-- [`makeResizable`](docs/makeResizable.md) - Make text objects look good even when resized
+- [`handleResize`](docs/handleResize.md) - Make text objects look good even when resized
 
 - [`getAllChildren`](docs/getAllChildren.md) - Get all children (including the input display object) from this point in the hierarchy.
 

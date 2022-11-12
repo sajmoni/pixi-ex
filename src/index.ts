@@ -1,6 +1,5 @@
 export * from './constructors'
 export * from './helpers'
 export * from './core'
-export * from './onDrag'
 export * from './collisions'
 export * from './modifiers'

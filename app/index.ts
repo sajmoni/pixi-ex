@@ -99,14 +99,6 @@ app.loader.load(() => {
   ex.handleResize(globalPositionText)
   square1.addChild(globalPositionText)
 
-  ex.onDrag(square1, {
-    onMove: (position) => {
-      // TODO: Put this into onDrag?
-      square1.position.set(position.x, position.y)
-      globalPositionText.text = getGlobalPositionTextContent()
-    },
-  })
-
   const textureIdTitle = ex.text(container, { fill: '#ffffff' }, 'Texture ids:')
   ex.handleResize(textureIdTitle)
   textureIdTitle.position.set(GAME_WIDTH - 200, 200)

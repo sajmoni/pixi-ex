@@ -34,8 +34,6 @@
 
 - [`makeClickable`](docs/makeClickable.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
 
-- [`makeDraggable`](docs/makeDraggable.md) - Make a display object "draggable". Opacity is set to `0.5` while dragging.
-
 - [`makeResizable`](docs/makeResizable.md) - Make text objects look good even when resized
 
 - [`getAllChildren`](docs/getAllChildren.md) - Get all children (including the input display object) from this point in the hierarchy.

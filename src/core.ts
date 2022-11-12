@@ -3,8 +3,9 @@ import {
   type Container,
   type DisplayObject,
   type Graphics,
+  type Texture,
+  type Renderer,
   Assets,
-  Texture,
 } from 'pixi.js'
 import { Point } from 'pixi.js'
 import { text } from './constructors'
@@ -12,14 +13,16 @@ import { text } from './constructors'
 import { getAllChildren, getHeight, getWidth } from './helpers'
 import { getCells } from './internal'
 
-let _app: Application
+let _app: Application | { stage: Container; renderer: Renderer }
 let ratio = 1
 let gameWidth: number
 let gameHeight: number
 const textureMap: Record<string, Texture> = {}
 const textureIds: string[] = []
 
-export const init = (app: Application): void => {
+export const init = (
+  app: Application | { stage: Container; renderer: Renderer },
+): void => {
   gameWidth = app.renderer.width
   gameHeight = app.renderer.height
 

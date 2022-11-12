@@ -1,8 +1,15 @@
 import test from 'ava'
 import * as ex from 'pixi-ex'
-import { Container, Graphics } from 'pixi.js'
+import { Container, Graphics, Assets } from 'pixi.js'
 
-import * as internal from './src/internal'
+import * as internal from '../src/internal'
+
+import { JSDOM } from 'jsdom'
+
+test.before(() => {
+  const dom = new JSDOM('<div id="my-element-id" />') // insert any html needed for the unit test suite here
+  global.document = dom.window.document // add the globals needed for the unit tests in this suite.
+})
 
 const container = new Container()
 container.name = 'container'
@@ -28,34 +35,27 @@ const mockPixiApp = {
     height: 600,
     resize: () => {},
   },
-  loader: {
-    resources: {
-      'spritesheet.json': {
-        textures: { 'sprite1.png': {} },
-      },
-    },
-  },
 }
 
-test('some functions throw errors before init is called', (t) => {
-  t.throws(() => ex.getTexture('sprite1.png'))
-  t.throws(() => ex.getAllTextureIds())
+test('some functions throw errors before init is called', async (t) => {
   t.throws(() => ex.drawHitArea(new Container(), new Graphics()))
   t.throws(() => ex.resize(10, 10))
   t.throws(() => ex.showGrid(new Graphics()))
   //@ts-expect-error
   ex.init(mockPixiApp)
+  Assets.add('spritesheet', 'spritesheet.json')
+  await ex.load('spritesheet')
 })
 
-test('getTexture', (t) => {
+test.serial('getTexture', (t) => {
   t.deepEqual(ex.getTexture('sprite1.png'), {})
 })
 
-test('getTexture - texture not found', (t) => {
+test.serial('getTexture - texture not found', (t) => {
   t.throws(() => ex.getTexture('sprite2.png'))
 })
 
-test('getAllTextureIds', (t) => {
+test.serial('getAllTextureIds', (t) => {
   t.deepEqual(ex.getAllTextureIds(), ['sprite1.png'])
 })
 
@@ -126,27 +126,4 @@ test('centerY', (t) => {
   ex.centerY(displayObject, yPosition)
   t.is(displayObject.y, 500)
   t.is(displayObject.pivot.y, 50)
-})
-
-test('init - duplicate texture names across sprite sheets', (t) => {
-  t.deepEqual(ex.getTexture('sprite1.png'), {})
-  t.throws(() =>
-    ex.init({
-      ...mockPixiApp,
-      loader: {
-        ...mockPixiApp.loader,
-        resources: {
-          ...mockPixiApp.loader.resources,
-          'spritesheet.json': {
-            //@ts-expect-error
-            textures: { 'sprite1.png': {} },
-          },
-          'spritesheet2.json': {
-            //@ts-expect-error
-            textures: { 'sprite1.png': {} },
-          },
-        },
-      },
-    }),
-  )
 })

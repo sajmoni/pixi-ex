@@ -1,5 +1,12 @@
 import * as ex from 'pixi-ex'
-import { Application, Container, Rectangle, Graphics, utils } from 'pixi.js'
+import {
+  Application,
+  Container,
+  Rectangle,
+  Graphics,
+  utils,
+  Assets,
+} from 'pixi.js'
 
 const GAME_WIDTH = 1280
 const GAME_HEIGHT = 720
@@ -12,9 +19,10 @@ const app = new Application({
 
 document.querySelector('#game')?.append(app.view)
 
-app.loader.add('spritesheet.json')
+Assets.add('spritesheet', 'spritesheet.json')
 
-app.loader.load(() => {
+async function run() {
+  await ex.loadAssets('spritesheet')
   ex.init(app)
   const container = ex.container(app.stage)
 
@@ -150,4 +158,6 @@ app.loader.load(() => {
   ex.showGrid(gridGraphics, 4)
 
   ex.showMousePosition(container)
-})
+}
+
+run()

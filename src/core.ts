@@ -1,10 +1,9 @@
-import type {
-  Application,
-  Container,
-  DisplayObject,
-  Graphics,
-  Loader,
-  Renderer,
+import {
+  type Application,
+  type Container,
+  type DisplayObject,
+  type Graphics,
+  Assets,
   Texture,
 } from 'pixi.js'
 import { Point } from 'pixi.js'
@@ -13,67 +12,33 @@ import { text } from './constructors'
 import { getAllChildren, getHeight, getWidth } from './helpers'
 import { getCells } from './internal'
 
-let _app: App | Application
+let _app: Application
 let ratio = 1
 let gameWidth: number
 let gameHeight: number
 const textureMap: Record<string, Texture> = {}
 const textureIds: string[] = []
 
-type App = {
-  readonly renderer: Renderer
-  readonly stage: Container
-  readonly loader: Loader
-}
-
-const extractTextures = (app: App | Application): void => {
-  const textureEntries: Array<[string, Texture]> = Object.values(
-    app.loader.resources,
-  ).flatMap((resource) =>
-    resource.textures ? Object.entries(resource.textures) : [],
-  )
-
-  textureEntries.forEach(([key, texture]) => {
-    textureIds.push(key)
-
-    if (textureMap[key]) {
-      throw new Error(
-        `pixi-ex: Duplicate texture name found: ${key}. Texture names need to be unique`,
-      )
-    } else {
-      textureMap[key] = texture
-    }
-  })
-}
-
-export const init = (app: App | Application): void => {
+export const init = (app: Application): void => {
   gameWidth = app.renderer.width
   gameHeight = app.renderer.height
 
   _app = app
+}
 
-  const noTexturesFound =
-    Object.values(_app.loader.resources).filter((resource) => resource.textures)
-      .length === 0
-
-  if (noTexturesFound) {
-    console.warn(
-      'pixi-ex: No textures found! init needs to be called after resources have been loaded.',
-    )
-  } else {
-    extractTextures(app)
+export const loadAssets = async (key: string): Promise<void> => {
+  const spritesheet = await Assets.load(key)
+  for (const [key, texture] of Object.entries(spritesheet.textures)) {
+    textureIds.push(key)
+    textureMap[key] = texture as Texture
   }
 }
 
-const throwErrorIfNoInit = () => {
-  if (!_app) {
-    throw new Error('pixi-ex: init has not been called')
-  }
+export const getAllTextureIds = (): string[] => {
+  return textureIds
 }
 
 export const getTexture = (filename: string): Texture => {
-  throwErrorIfNoInit()
-
   const texture = textureMap[filename]
 
   if (!texture) {
@@ -93,10 +58,10 @@ export const getTextures = (filenames: string[]): Texture[] => {
   return textures
 }
 
-export const getAllTextureIds = (): string[] => {
-  throwErrorIfNoInit()
-
-  return textureIds
+const throwErrorIfNoInit = () => {
+  if (!_app) {
+    throw new Error('pixi-ex: init has not been called')
+  }
 }
 
 /**

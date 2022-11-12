@@ -1,4 +1,11 @@
-import type { DisplayObject, InteractionEvent, Text } from 'pixi.js'
+import type {
+  Container,
+  DisplayObject,
+  DisplayObjectEvents,
+  FederatedPointerEvent,
+  FederatedWheelEvent,
+  Text,
+} from 'pixi.js'
 
 import { getGameScale } from './core'
 
@@ -43,17 +50,25 @@ export const onHover = (
   })
 }
 
-const CLICK_EVENTS = ['click', 'tap']
+const CLICK_EVENTS: Array<keyof DisplayObjectEvents> = ['click', 'tap']
 
 export const onClick = (
   displayObject: DisplayObject,
-  callback: (event: InteractionEvent) => void,
+  callback: (
+    event:
+      | DisplayObject
+      | Container<DisplayObject>
+      | FederatedPointerEvent
+      | FederatedWheelEvent
+      | undefined,
+  ) => void,
 ): void => {
   displayObject.interactive = true
   displayObject.cursor = 'pointer'
 
   CLICK_EVENTS.forEach((clickEvent) => {
-    displayObject.on(clickEvent, (event: InteractionEvent) => {
+    // @ts-expect-error TODO: Figure type out here
+    displayObject.on(clickEvent, (event) => {
       callback(event)
     })
   })

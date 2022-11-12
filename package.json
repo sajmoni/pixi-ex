@@ -35,7 +35,6 @@
   "devDependencies": {
     "ava": "5.0.1",
     "esbuild-runner": "2.2.2",
-    "jsdom": "20.0.2",
     "np": "7.6.2",
     "package-preview": "4.0.0",
     "pixi.js": "7.0.3",

@@ -36,20 +36,6 @@ test('some functions throw errors before init is called', async (t) => {
   t.throws(() => ex.showGrid(new Graphics()))
   //@ts-expect-error
   ex.init(mockPixiApp)
-  Assets.add('spritesheet', 'spritesheet.json')
-  await ex.load('spritesheet')
-})
-
-test.serial('getTexture', (t) => {
-  t.deepEqual(ex.getTexture('sprite1.png'), {})
-})
-
-test.serial('getTexture - texture not found', (t) => {
-  t.throws(() => ex.getTexture('sprite2.png'))
-})
-
-test.serial('getAllTextureIds', (t) => {
-  t.deepEqual(ex.getAllTextureIds(), ['sprite1.png'])
 })
 
 test('getAllChildren', (t) => {

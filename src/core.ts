@@ -5,7 +5,6 @@ import {
   type Graphics,
   type Texture,
   type Renderer,
-  Assets,
 } from 'pixi.js'
 import { Point } from 'pixi.js'
 import { text } from './constructors'
@@ -17,8 +16,6 @@ let _app: Application | { stage: Container; renderer: Renderer }
 let ratio = 1
 let gameWidth: number
 let gameHeight: number
-const textureMap: Record<string, Texture> = {}
-const textureIds: string[] = []
 
 export const init = (
   app: Application | { stage: Container; renderer: Renderer },
@@ -27,38 +24,6 @@ export const init = (
   gameHeight = app.renderer.height
 
   _app = app
-}
-
-export const loadAssets = async (key: string): Promise<void> => {
-  const spritesheet = await Assets.load(key)
-  for (const [key, texture] of Object.entries(spritesheet.textures)) {
-    textureIds.push(key)
-    textureMap[key] = texture as Texture
-  }
-}
-
-export const getAllTextureIds = (): string[] => {
-  return textureIds
-}
-
-export const getTexture = (filename: string): Texture => {
-  const texture = textureMap[filename]
-
-  if (!texture) {
-    throw new Error(`pixi-ex: Texture "${filename}" could not be retrieved`)
-  }
-
-  return texture
-}
-
-export const getTextures = (filenames: string[]): Texture[] => {
-  let textures = []
-
-  for (const filename of filenames) {
-    textures.push(getTexture(filename))
-  }
-
-  return textures
 }
 
 const throwErrorIfNoInit = () => {

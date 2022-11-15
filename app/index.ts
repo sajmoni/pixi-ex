@@ -22,7 +22,7 @@ document.querySelector('#game')?.append(app.view)
 Assets.add('spritesheet', 'spritesheet.json')
 
 async function run() {
-  await ex.loadAssets('spritesheet')
+  const { textures } = await Assets.load('spritesheet')
   ex.init(app)
   const container = ex.container(app.stage)
 
@@ -56,7 +56,7 @@ async function run() {
   square2.position.set(250, 50)
   squareContainer.addChild(square2)
 
-  const square1 = ex.sprite(squareContainer, ex.getTexture('square1.png'))
+  const square1 = ex.sprite(squareContainer, textures['square1.png'])
   square1.position.set(50, 50)
   square1.anchor.set(0.5)
   square1.alpha = 0.6
@@ -106,18 +106,6 @@ async function run() {
   )
   ex.handleResize(globalPositionText)
   square1.addChild(globalPositionText)
-
-  const textureIdTitle = ex.text(container, { fill: '#ffffff' }, 'Texture ids:')
-  ex.handleResize(textureIdTitle)
-  textureIdTitle.position.set(GAME_WIDTH - 200, 200)
-  textureIdTitle.anchor.set(0.5)
-
-  ex.getAllTextureIds().forEach((textureId, index) => {
-    const text = ex.text(container, { fill: '#ffffff' }, textureId)
-    ex.handleResize(text)
-    text.position.set(GAME_WIDTH - 200, 250 + index * 50)
-    text.anchor.set(0.5)
-  })
 
   let clicked = 0
   const clickMe = ex.text(

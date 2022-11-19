@@ -33,13 +33,13 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "ava": "5.0.1",
+    "ava": "5.1.0",
     "esbuild-runner": "2.2.2",
     "np": "7.6.2",
     "package-preview": "4.0.0",
-    "pixi.js": "7.0.3",
+    "pixi.js": "7.0.4",
     "prettier": "2.7.1",
-    "typescript": "4.8.4"
+    "typescript": "4.9.3"
   },
   "peerDependencies": {
     "pixi.js": "7.x"

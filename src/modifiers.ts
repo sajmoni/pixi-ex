@@ -35,18 +35,22 @@ export const handleResize = (textObject: Text): void => {
 
 export const onHover = (
   displayObject: DisplayObject,
-  options: { onOver: () => void; onOut: () => void },
+  options: { onOver?: () => void; onOut?: () => void },
 ) => {
   const { onOver, onOut } = options
 
   displayObject.interactive = true
 
   displayObject.on('pointerover', () => {
-    onOver()
+    if (onOver) {
+      onOver()
+    }
   })
 
   displayObject.on('pointerout', () => {
-    onOut()
+    if (onOut) {
+      onOut()
+    }
   })
 }
 

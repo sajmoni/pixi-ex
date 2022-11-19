@@ -1,12 +1,5 @@
 import * as ex from 'pixi-ex'
-import {
-  Application,
-  Container,
-  Rectangle,
-  Graphics,
-  utils,
-  Assets,
-} from 'pixi.js'
+import { Application, Container, Rectangle, Graphics, Assets } from 'pixi.js'
 
 const GAME_WIDTH = 1280
 const GAME_HEIGHT = 720
@@ -66,20 +59,6 @@ async function run() {
   overlappingText.anchor.set(0.5)
 
   app.ticker.add(() => {
-    if (ex.isColliding(square1, square2)) {
-      square2
-        .clear()
-        .beginFill(utils.string2hex('#00ff00'))
-        .drawRect(-16, -16, 32, 32)
-        .endFill()
-    } else {
-      square2
-        .clear()
-        .beginFill(utils.string2hex('#0000ff'))
-        .drawRect(-16, -16, 32, 32)
-        .endFill()
-    }
-
     overlappingText.text = `${ex.getOverlappingArea(square1, square2)}`
   })
 

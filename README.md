@@ -28,8 +28,6 @@
 
 - [`drawHitArea`](docs/drawHitArea.md) - Debug your display objects hit areas
 
-- [`isColliding`](docs/isColliding.md) - Returns true if two display objects are colliding / overlapping
-
 - [`onClick`](docs/onClick.md) - Sets `interactive` to true, changes mouse cursor to `pointer` and adds a click listener to the display object.
 
 - [`handleResize`](docs/handleResize.md) - Make text objects look good even when resized

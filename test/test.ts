@@ -1,6 +1,6 @@
 import test from 'ava'
 import * as ex from 'pixi-ex'
-import { Container, Graphics, Assets } from 'pixi.js'
+import { Container, Graphics, Assets, Sprite } from 'pixi.js'
 
 import * as internal from '../src/internal'
 
@@ -105,4 +105,18 @@ test('centerY', (t) => {
   ex.centerY(displayObject, yPosition)
   t.is(displayObject.y, 500)
   t.is(displayObject.pivot.y, 50)
+})
+
+test('centerPivot', (t) => {
+  const container = new Container()
+  const sprite = new Sprite()
+  sprite.height = 200
+  sprite.width = 300
+  container.addChild(sprite)
+
+  t.is(container.pivot.x, 0)
+  t.is(container.pivot.y, 0)
+  ex.centerPivot(container)
+  t.is(container.pivot.x, 150)
+  t.is(container.pivot.y, 100)
 })

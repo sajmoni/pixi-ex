@@ -52,6 +52,10 @@ export const getHeight = (object: Container): number => {
   return object.height
 }
 
+export const centerPivot = (container: Container): void => {
+  container.pivot.set(container.width / 2, container.height / 2)
+}
+
 export const centerX = (container: Container, xPosition: number): void => {
   container.x = xPosition
   container.pivot.x = container.width / 2

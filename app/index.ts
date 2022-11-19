@@ -16,7 +16,6 @@ Assets.add('spritesheet', 'spritesheet.json')
 
 async function run() {
   const { textures } = await Assets.load('spritesheet')
-  ex.init(app)
   const container = ex.container(app.stage)
 
   const scale = ex.text(container, { fill: '#ffffff' })
@@ -25,7 +24,7 @@ async function run() {
   scale.y = 20
   ex.handleResize(scale)
 
-  ex.useAutoFullScreen(() => {
+  ex.useAutoFullScreen(app, () => {
     scale.text = `Canvas will resize when window is resized. Scale: ${ex.getGameScale()}`
   })
 
@@ -42,7 +41,11 @@ async function run() {
   squareContainer.hitArea = new Rectangle(0, 0, 300, 200)
   container.addChild(squareContainer)
 
-  const renderHitArea = ex.drawHitArea(squareContainer, new Graphics())
+  const renderHitArea = ex.drawHitArea(
+    app.stage,
+    squareContainer,
+    new Graphics(),
+  )
   app.ticker.add(renderHitArea)
 
   const square2 = new Graphics()
@@ -122,9 +125,8 @@ async function run() {
   // * Grid overlay
   const gridGraphics = ex.graphics(container)
   gridGraphics.lineStyle(2, 0xff00ff, 0.5)
-  ex.showGrid(gridGraphics, 4)
-
-  ex.showMousePosition(container)
+  ex.showGrid(app.renderer, gridGraphics, 4)
+  ex.showMousePosition(app.renderer, container)
 }
 
 run()

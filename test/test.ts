@@ -1,6 +1,6 @@
 import test from 'ava'
 import * as ex from 'pixi-ex'
-import { Container, Graphics, Assets, Sprite } from 'pixi.js'
+import { Container, Graphics, Sprite } from 'pixi.js'
 
 import * as internal from '../src/internal'
 
@@ -21,22 +21,16 @@ mockStage.addChild(child2)
 
 mockStage.addChild(container)
 
-const mockPixiApp = {
-  stage: mockStage,
-  renderer: {
-    width: 800,
-    height: 600,
-    resize: () => {},
-  },
+const mockRenderer = {
+  width: 800,
+  height: 600,
+  resize: () => {},
 }
 
-test('some functions throw errors before init is called', async (t) => {
-  t.throws(() => ex.drawHitArea(new Container(), new Graphics()))
-  t.throws(() => ex.resize(10, 10))
-  t.throws(() => ex.showGrid(new Graphics()))
-  //@ts-expect-error
-  ex.init(mockPixiApp)
-})
+const mockPixiApp = {
+  stage: mockStage,
+  renderer: mockRenderer,
+}
 
 test('getAllChildren', (t) => {
   t.deepEqual(
@@ -47,14 +41,14 @@ test('getAllChildren', (t) => {
 
 test('resize', (t) => {
   t.notThrows(() => {
-    ex.resize(1200, 1000)
+    ex.resize(mockPixiApp, 1200, 1000)
   })
 })
 
 // TODO: Enable this test again once pixi supports it
 test.skip('showGrid', (t) => {
   t.notThrows(() => {
-    ex.showGrid(new Graphics(), 2)
+    ex.showGrid(mockPixiApp.renderer, new Graphics(), 2)
   })
 })
 

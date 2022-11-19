@@ -1,9 +1,9 @@
 import {
+  IRenderer,
   type Application,
   type Container,
   type DisplayObject,
   type Graphics,
-  type Texture,
   type Renderer,
 } from 'pixi.js'
 import { Point } from 'pixi.js'
@@ -12,44 +12,30 @@ import { text } from './constructors'
 import { getAllChildren, getHeight, getWidth } from './helpers'
 import { getCells } from './internal'
 
-let _app: Application | { stage: Container; renderer: Renderer }
+export type App =
+  | Application
+  | { stage: Container; renderer: Renderer | IRenderer }
 let ratio = 1
-let gameWidth: number
-let gameHeight: number
-
-export const init = (
-  app: Application | { stage: Container; renderer: Renderer },
-): void => {
-  gameWidth = app.renderer.width
-  gameHeight = app.renderer.height
-
-  _app = app
-}
-
-const throwErrorIfNoInit = () => {
-  if (!_app) {
-    throw new Error('pixi-ex: init has not been called')
-  }
-}
 
 /**
  * Resize the stage and maintain good text quality
  */
-export const resize = (width: number, height: number): void => {
-  throwErrorIfNoInit()
+export const resize = (app: App, width: number, height: number): void => {
+  const gameWidth = app.renderer.width
+  const gameHeight = app.renderer.height
 
   ratio = Math.min(width / gameWidth, height / gameHeight)
 
-  _app.stage.scale.set(ratio)
+  app.stage.scale.set(ratio)
 
-  _app.renderer.resize(gameWidth * ratio, gameHeight * ratio)
+  app.renderer.resize(gameWidth * ratio, gameHeight * ratio)
 
   /*
       The following code is needed to counteract the scale change on the whole canvas since
       texts get distorted by PIXI when you try to change their scale.
       Texts instead change size by setting their fontSize.
     */
-  getAllChildren(_app.stage)
+  getAllChildren(app.stage)
     // * Keep if resizable text object
     .filter((child: any) => child.originalFontSize)
     .forEach((resizableTextObject: any) => {
@@ -68,21 +54,20 @@ export const getGameScale = (): number => ratio
 type renderFn = () => void
 
 export const drawHitArea = (
-  container: Container,
+  stage: Container,
+  object: Container,
   graphics: Graphics,
 ): renderFn => {
-  throwErrorIfNoInit()
-
   graphics.name = 'pixi-ex: drawHitArea'
-  _app.stage.addChild(graphics)
+  stage.addChild(graphics)
 
   const render = () => {
     // @ts-expect-error
-    if (!container._destroyed) {
-      const width = getWidth(container)
-      const height = getHeight(container)
+    if (!object._destroyed) {
+      const width = getWidth(object)
+      const height = getHeight(object)
 
-      const { x, y } = getGlobalPosition(container)
+      const { x, y } = getGlobalPosition(object)
 
       graphics.clear().lineStyle(2, 0xffffff, 1).drawRect(x, y, width, height)
     }
@@ -92,11 +77,11 @@ export const drawHitArea = (
 }
 
 // * Make game fullscreen and resize when window is resized
-export const useAutoFullScreen = (onChange?: () => void): void => {
+export const useAutoFullScreen = (app: App, onChange?: () => void): void => {
   const resizeGame = () => {
     const screenWidth = window.innerWidth
     const screenHeight = window.innerHeight
-    resize(screenWidth, screenHeight)
+    resize(app, screenWidth, screenHeight)
     if (onChange) {
       onChange()
     }
@@ -113,10 +98,12 @@ export const useAutoFullScreen = (onChange?: () => void): void => {
  *
  * Set the lineStyle before passing in the graphics object.
  */
-export const showGrid = (graphics: Graphics, numberOfCells = 2): void => {
-  throwErrorIfNoInit()
-
-  const { resolution, width, height } = _app.renderer
+export const showGrid = (
+  renderer: Renderer | IRenderer,
+  graphics: Graphics,
+  numberOfCells = 2,
+): void => {
+  const { resolution, width, height } = renderer
   const cells = getCells({
     resolution,
     width,
@@ -142,11 +129,12 @@ export const getGlobalPosition = (
   }
 }
 
-export const showMousePosition = (container: Container) => {
-  throwErrorIfNoInit()
-
+export const showMousePosition = (
+  renderer: Renderer | IRenderer,
+  container: Container,
+) => {
   const _text = text(container, { fontSize: 16, fill: 'white' })
-  const { resolution } = _app.renderer
+  const { resolution } = renderer
 
   container.interactive = true
   container.on('mousemove', (event) => {

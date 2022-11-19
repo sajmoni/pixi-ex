@@ -42,8 +42,6 @@
 
 - [`getGameScale`](api/getGameScale.md) - Get the game scale after resize
 
-- [`init`](api/init.md) - Required to be called before using certain features
-
 ### Constructors
 
 The purpose of these are:

@@ -13,6 +13,8 @@
 
 ## Features
 
+- Enhanced built-in functions
+- Convenience functions for creating sprites, texts etc.
 - Written in TypeScript
 - Zero dependencies
 
@@ -44,12 +46,12 @@
 
 ### Constructors
 
-The purpose of these are:
+Benefits:
 
-1. Always adds the object to a parent
-2. No need to use the `new` keyword ("new Sprite" -> "sprite")
-3. Animated sprite: Auto-plays
-4. Text: Enforces a text style to be set
+- Always adds the object to a parent
+- No need to use the `new` keyword ("new Sprite" -> "sprite")
+- `AnimatedSprite` auto-plays
+- Enforces a `TextStyle` to be set on `Text`
 
 ```ts
 sprite(parent: Container, texture?: Texture): Sprite
@@ -118,11 +120,7 @@ Accepts a `Rectangle`
 
 - getAllChildren
 
----
-
-## Example usage
-
-Check out [`app/index.js`](app/index.js) for example usages
+- centerPivot
 
 ---
 
@@ -131,3 +129,9 @@ Check out [`app/index.js`](app/index.js) for example usages
 ```sh
 npm install pixi-ex
 ```
+
+---
+
+## Example usage
+
+Check out [`app/index.js`](app/index.js) for example usages
